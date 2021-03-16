@@ -42,7 +42,7 @@ public class UserDao {
 
     public void updateUser(User user) {
         Connection conn = JDBCConection.getConnection();
-        String sql = "update Account  set id = ?, username = ?, pass = ?, type = ?";
+        String sql = "update Account set id = ?, username = ?, pass = ?, type = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -90,5 +90,28 @@ public class UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public User getUsersById(int id) {
+        
+        Connection conn = JDBCConection.getConnection();
+        String sql = "select * from Account where id = ?";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setInt(1, id);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUser(rs.getString("username"));
+                user.setPass(rs.getString("pass"));
+                user.setType(rs.getString("type"));
+                
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
