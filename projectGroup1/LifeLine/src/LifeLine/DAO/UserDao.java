@@ -42,15 +42,15 @@ public class UserDao {
 
     public void updateUser(User user) {
         Connection conn = JDBCConection.getConnection();
-        String sql = "update Account set id = ?, username = ?, pass = ?, type = ?";
+        String sql = "update Account set username = ?, pass = ?, type = ? where id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
-            pStatement.setInt(1, user.getId());
-            pStatement.setString(2, user.getUser());
-            pStatement.setString(3, user.getPass());
-            pStatement.setString(4, user.getType());
-
+            
+            pStatement.setString(1, user.getUser());
+            pStatement.setString(2, user.getPass());
+            pStatement.setString(3, user.getType());
+            pStatement.setInt(4, user.getId());
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
 
