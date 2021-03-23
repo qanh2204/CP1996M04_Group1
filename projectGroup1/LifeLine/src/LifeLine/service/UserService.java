@@ -39,4 +39,8 @@ public class UserService {
     public void updateUser(User user){
         userDao.updateUser(user);
     }
+    
+    public String getType(String user, String pass){
+        return userDao.getType(user, pass);
+    }
 }

@@ -7,16 +7,10 @@ package LifeLine.view;
 
 /**
  *
- * @author Windows
+ * @author qanh2
  */
-public class Main {
-
+public class Test {
     public static void main(String[] args) {
-        DangNhapJDialog dialog = new DangNhapJDialog(null, true);
-        dialog.setTitle("Sign in");
-        dialog.setResizable(false);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        new MainStaffFrame().setVisible(true);
     }
-
 }

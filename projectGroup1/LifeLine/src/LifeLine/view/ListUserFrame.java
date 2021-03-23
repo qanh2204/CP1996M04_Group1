@@ -5,6 +5,7 @@
  */
 package lifeLine.view;
 
+import java.awt.Font;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,10 +37,11 @@ public class ListUserFrame extends javax.swing.JFrame {
         };
         userTable.setModel(dTableModel);
 
-        dTableModel.addColumn("id");
-        dTableModel.addColumn("username");
-        dTableModel.addColumn("pass");
-        dTableModel.addColumn("type");
+        dTableModel.addColumn("Id");
+        dTableModel.addColumn("User Name");
+        dTableModel.addColumn("Password");
+        dTableModel.addColumn("Type");
+        userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
 
         setTableData(userService.getAllUsers());
     }
@@ -59,31 +61,113 @@ public class ListUserFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addUserBtn = new javax.swing.JButton();
-        refreshBtn = new javax.swing.JButton();
+        Menu = new javax.swing.JPanel();
+        jpnReport = new javax.swing.JPanel();
+        jlbReport = new javax.swing.JLabel();
+        jpnTest = new javax.swing.JPanel();
+        jlbTest = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        Menu1 = new javax.swing.JPanel();
+        addUserBtn = new javax.swing.JButton();
         delBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
+        refreshBtn = new javax.swing.JButton();
+
+        Menu.setBackground(new java.awt.Color(27, 52, 9));
+
+        jpnReport.setBackground(new java.awt.Color(27, 52, 9));
+
+        jlbReport.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbReport.setForeground(new java.awt.Color(255, 255, 255));
+        jlbReport.setText("Report");
+
+        javax.swing.GroupLayout jpnReportLayout = new javax.swing.GroupLayout(jpnReport);
+        jpnReport.setLayout(jpnReportLayout);
+        jpnReportLayout.setHorizontalGroup(
+            jpnReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbReport, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnReportLayout.setVerticalGroup(
+            jpnReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnReportLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbReport, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnTest.setBackground(new java.awt.Color(27, 52, 9));
+
+        jlbTest.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbTest.setForeground(new java.awt.Color(255, 255, 255));
+        jlbTest.setText("Test Management");
+
+        javax.swing.GroupLayout jpnTestLayout = new javax.swing.GroupLayout(jpnTest);
+        jpnTest.setLayout(jpnTestLayout);
+        jpnTestLayout.setHorizontalGroup(
+            jpnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnTestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbTest, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnTestLayout.setVerticalGroup(
+            jpnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnTestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbTest, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
+        Menu.setLayout(MenuLayout);
+        MenuLayout.setHorizontalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuLayout.createSequentialGroup()
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jpnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jpnTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        MenuLayout.setVerticalGroup(
+            MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MenuLayout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jpnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(jpnTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(275, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        addUserBtn.setText("Add");
-        addUserBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addUserBtnActionPerformed(evt);
-            }
-        });
-
-        refreshBtn.setText("Refresh");
-        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshBtnActionPerformed(evt);
-            }
-        });
-
         userTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -94,9 +178,45 @@ public class ListUserFrame extends javax.swing.JFrame {
             }
         ));
         userTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        userTable.setRowHeight(30);
         userTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(userTable);
 
+        jPanel3.setBackground(new java.awt.Color(102, 176, 50));
+
+        jLabel1.setBackground(new java.awt.Color(102, 176, 50));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("LIFE LINE");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1309, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
+                .addGap(9, 9, 9))
+        );
+
+        Menu1.setBackground(new java.awt.Color(27, 52, 9));
+
+        addUserBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        addUserBtn.setText("Add");
+        addUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserBtnActionPerformed(evt);
+            }
+        });
+
+        delBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         delBtn.setText("Delete");
         delBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +224,7 @@ public class ListUserFrame extends javax.swing.JFrame {
             }
         });
 
+        editBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         editBtn.setText("Edit");
         editBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,36 +232,66 @@ public class ListUserFrame extends javax.swing.JFrame {
             }
         });
 
+        refreshBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout Menu1Layout = new javax.swing.GroupLayout(Menu1);
+        Menu1.setLayout(Menu1Layout);
+        Menu1Layout.setHorizontalGroup(
+            Menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Menu1Layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addGroup(Menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
+        );
+        Menu1Layout.setVerticalGroup(
+            Menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Menu1Layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(addUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(editBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(delBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(90, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(214, 214, 214)
-                .addComponent(addUserBtn)
-                .addGap(75, 75, 75)
-                .addComponent(delBtn)
-                .addGap(90, 90, 90)
-                .addComponent(editBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(refreshBtn)
-                .addGap(261, 261, 261))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addUserBtn)
-                    .addComponent(refreshBtn)
-                    .addComponent(delBtn)
-                    .addComponent(editBtn))
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Menu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -180,10 +331,10 @@ public class ListUserFrame extends javax.swing.JFrame {
         int row = userTable.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(ListUserFrame.this, "Please select user first", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {            
-                int userId = Integer.valueOf(String.valueOf(userTable.getValueAt(row,0)));
-                new LifeLine.view.EditUserFrame(userId).setVisible(true);
-                this.dispose();
+        } else {
+            int userId = Integer.valueOf(String.valueOf(userTable.getValueAt(row, 0)));
+            new LifeLine.view.EditUserFrame(userId).setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -223,10 +374,18 @@ public class ListUserFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Menu;
+    private javax.swing.JPanel Menu1;
     private javax.swing.JButton addUserBtn;
     private javax.swing.JButton delBtn;
     private javax.swing.JButton editBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jlbReport;
+    private javax.swing.JLabel jlbTest;
+    private javax.swing.JPanel jpnReport;
+    private javax.swing.JPanel jpnTest;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables

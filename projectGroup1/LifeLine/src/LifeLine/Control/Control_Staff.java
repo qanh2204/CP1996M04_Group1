@@ -6,8 +6,8 @@
 package LifeLine.Control;
 
 import LifeLine.view.Bill;
+import LifeLine.view.ListStaffJPanel;
 import LifeLine.view.Patient;
-import LifeLine.view.Staff;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -16,14 +16,14 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Control {
+public class Control_Staff {
 
     private JPanel root;
     private String kindSelected = "";
 
     private List<DanhMucBean> listItem = null;
 
-    public Control(JPanel jpnroot) {
+    public Control_Staff(JPanel jpnroot) {
         this.root = jpnroot;
     }
 
@@ -68,7 +68,7 @@ public class Control {
                     node =  new Patient();
                     break;
                 case "Staff":
-                    node =  new Staff();
+                    node =  new ListStaffJPanel();
                     break;
                 case "Bill":
                     node =  new Bill();

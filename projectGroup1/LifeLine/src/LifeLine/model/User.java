@@ -26,7 +26,6 @@ public class User {
     public User() {
     }
 
-    
 
     public int getId() {
         return id;
@@ -58,11 +57,6 @@ public class User {
 
     public void setType(String type) {
         this.type = type;
-    }
-    
-    public static void main(String[] args) {
-        
-        // TODO code application logic here
     }
     
 }
