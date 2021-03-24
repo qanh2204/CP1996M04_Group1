@@ -11,6 +11,8 @@ package LifeLine.view;
  */
 public class Test {
     public static void main(String[] args) {
-        new MainStaffFrame().setVisible(true);
+        //new MainStaffFrame().setVisible(true);
+        new ListStockJPanel().setVisible(true);
+        //new ListStaffJPanel().setVisible(true);
     }
 }

@@ -7,7 +7,8 @@ package LifeLine.Control;
 
 import LifeLine.view.Bill;
 import LifeLine.view.ListStaffJPanel;
-import LifeLine.view.Patient;
+import LifeLine.view.ListPatientJPanel;
+import LifeLine.view.ListStockJPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -28,7 +29,7 @@ public class Control_Staff {
     }
 
     public void setView(JPanel jpnItem, JLabel jlbItem) {
-        kindSelected = "DonHang";
+        kindSelected = "Staff";
         jpnItem.setBackground(new Color(247, 242, 212));
         jlbItem.setBackground(new Color(247, 242, 212));
         jlbItem.setForeground(Color.BLACK);
@@ -65,10 +66,13 @@ public class Control_Staff {
         public void mouseClicked(MouseEvent e) {
             switch (kind) {
                 case "Patient":
-                    node =  new Patient();
+                    node =  new ListPatientJPanel();
                     break;
                 case "Staff":
                     node =  new ListStaffJPanel();
+                    break;
+                case "Stock":
+                    node =  new ListStockJPanel();
                     break;
                 case "Bill":
                     node =  new Bill();

@@ -21,7 +21,7 @@ import lifeLine.DAO.JDBCConection;
 public class StaffDao {
 
     public List<Staff> getAllStaffs() {
-        List<Staff> staffs = new ArrayList<>();
+        List<Staff> staffs = new ArrayList<Staff>();
         Connection conn = lifeLine.DAO.JDBCConection.getConnection();
         String sql = "select * from Staff";
         try {
@@ -35,7 +35,7 @@ public class StaffDao {
                 staff.setDoj(rs.getString("Doj"));
                 staff.setDept(rs.getString("Dept"));
                 staff.setAddr(rs.getString("addr"));
-                staff.setPhone(rs.getInt("P_no"));
+                staff.setPhone(rs.getString("P_no"));
                 staff.setSex(rs.getString("gender"));
                 staff.setDob(rs.getString("Dob"));
                 staff.setEdu(rs.getString("Edu_qual"));
@@ -44,6 +44,7 @@ public class StaffDao {
                 staffs.add(staff);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return staffs;
     }
@@ -61,7 +62,7 @@ public class StaffDao {
             pStatement.setString(3, staff.getDoj());
             pStatement.setString(4, staff.getDept());
             pStatement.setString(5, staff.getAddr());
-            pStatement.setInt(6, staff.getPhone());
+            pStatement.setString(6, staff.getPhone());
             pStatement.setString(7, staff.getSex());
             pStatement.setString(8, staff.getDob());
             pStatement.setString(9, staff.getEdu());
@@ -100,7 +101,7 @@ public class StaffDao {
             pStatement.setString(4, staff.getDoj());
             pStatement.setString(5, staff.getDept());
             pStatement.setString(6, staff.getAddr());
-            pStatement.setInt(7, staff.getPhone());
+            pStatement.setString(7, staff.getPhone());
             pStatement.setString(8, staff.getSex());
             pStatement.setString(9, staff.getDob());
             pStatement.setString(10, staff.getEdu());
@@ -130,7 +131,7 @@ public class StaffDao {
                 staff.setDoj(rs.getString("Doj"));
                 staff.setDept(rs.getString("Dept"));
                 staff.setAddr(rs.getString("addr"));
-                staff.setPhone(rs.getInt("P_no"));
+                staff.setPhone(rs.getString("P_no"));
                 staff.setSex(rs.getString("gender"));
                 staff.setDob(rs.getString("Dob"));
                 staff.setEdu(rs.getString("Edu_qual"));                

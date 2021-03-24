@@ -23,7 +23,7 @@ create table Patient(
 	Dept varchar(50) not null,
 	addr varchar(60) not null,
 	P_no varchar(11) not null,
-	gender char(4) not null,
+	gender char(10) not null,
 	Dob date not null,
 	test varchar(20) not null,
 	bill int not null

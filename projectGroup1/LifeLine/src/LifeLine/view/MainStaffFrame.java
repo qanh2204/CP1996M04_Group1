@@ -31,6 +31,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
         List<DanhMucBean> listItem = new ArrayList<>();
         listItem.add(new DanhMucBean("Staff", jpnStaff, jlbStaff));
         listItem.add(new DanhMucBean("Patient", jpnPatient, jlbPatient));
+        listItem.add(new DanhMucBean("Stock", jpnStock, jlbStock));
         listItem.add(new DanhMucBean("Bill", jpnBill, jlbBill));
         
         control.setEvent(listItem);
@@ -51,6 +52,8 @@ public class MainStaffFrame extends javax.swing.JFrame {
         jlbStaff = new javax.swing.JLabel();
         jpnPatient = new javax.swing.JPanel();
         jlbPatient = new javax.swing.JLabel();
+        jpnStock = new javax.swing.JPanel();
+        jlbStock = new javax.swing.JLabel();
         jpnBill = new javax.swing.JPanel();
         jlbBill = new javax.swing.JLabel();
         View = new javax.swing.JPanel();
@@ -73,7 +76,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnStaffLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jlbStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnStaffLayout.setVerticalGroup(
@@ -96,7 +99,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnPatientLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addComponent(jlbPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jpnPatientLayout.setVerticalGroup(
@@ -105,6 +108,26 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jlbPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jpnStock.setBackground(new java.awt.Color(32, 32, 96));
+
+        jlbStock.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbStock.setForeground(new java.awt.Color(255, 255, 255));
+        jlbStock.setText("Stock");
+
+        javax.swing.GroupLayout jpnStockLayout = new javax.swing.GroupLayout(jpnStock);
+        jpnStock.setLayout(jpnStockLayout);
+        jpnStockLayout.setHorizontalGroup(
+            jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnStockLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbStock, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpnStockLayout.setVerticalGroup(
+            jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlbStock, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
         jpnBill.setBackground(new java.awt.Color(32, 32, 96));
@@ -119,14 +142,14 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBillLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76))
         );
         jpnBillLayout.setVerticalGroup(
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnBillLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jlbBill, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBillLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -136,11 +159,16 @@ public class MainStaffFrame extends javax.swing.JFrame {
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jpnStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jpnStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpnStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpnPatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,8 +178,10 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addComponent(jpnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
-                .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addComponent(jpnStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
 
         View.setBackground(new java.awt.Color(153, 255, 255));
@@ -242,9 +272,11 @@ public class MainStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jlbBill;
     private javax.swing.JLabel jlbPatient;
     private javax.swing.JLabel jlbStaff;
+    private javax.swing.JLabel jlbStock;
     private javax.swing.JPanel jpnBill;
     private javax.swing.JPanel jpnPatient;
     private javax.swing.JPanel jpnRoot;
     private javax.swing.JPanel jpnStaff;
+    private javax.swing.JPanel jpnStock;
     // End of variables declaration//GEN-END:variables
 }

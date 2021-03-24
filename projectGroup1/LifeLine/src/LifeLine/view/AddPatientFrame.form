@@ -66,7 +66,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtEdu" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                                  <Component id="txtTest" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDob" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtPno" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
                                   <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtSkill" min="-2" pref="650" max="-2" attributes="0"/>
+                                  <Component id="txtBill" min="-2" pref="650" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -133,12 +133,12 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEdu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTest" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSkill" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBill" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -174,6 +174,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
+        <Property name="selected" type="boolean" value="true"/>
         <Property name="text" type="java.lang.String" value="Male"/>
       </Properties>
     </Component>
@@ -202,13 +203,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtId">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -247,12 +241,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Education"/>
+        <Property name="text" type="java.lang.String" value="Test"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Technical Skill"/>
+        <Property name="text" type="java.lang.String" value="Bill"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDep">
@@ -270,9 +264,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtDob">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEdu">
+    <Component class="javax.swing.JTextField" name="txtTest">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSkill">
+    <Component class="javax.swing.JTextField" name="txtBill">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
@@ -311,7 +305,7 @@
               <Font name="Tahoma" size="48" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="EDIT STAFF"/>
+            <Property name="text" type="java.lang.String" value="ADD STAFF"/>
           </Properties>
         </Component>
       </SubComponents>

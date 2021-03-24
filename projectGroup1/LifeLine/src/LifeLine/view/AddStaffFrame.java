@@ -257,7 +257,7 @@ public class AddStaffFrame extends javax.swing.JFrame {
         staff.setLname(txtLastName.getText());
         staff.setFname(txtFullName.getText());
         staff.setAddr(txtAddr.getText());
-        staff.setPhone(Integer.parseInt(txtId.getText()));
+        staff.setPhone(txtPno.getText());
         staff.setDob(txtDob.getText());
         staff.setEdu(txtEdu.getText());
         staff.setSkill(txtSkill.getText());

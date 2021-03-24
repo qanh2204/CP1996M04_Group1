@@ -9,26 +9,26 @@ package LifeLine.model;
  *
  * @author qanh2
  */
-public class Staff {
+public class Patient {
 
-    private int id ;
-    private String fname, lname, addr, edu, skill, dept, sex, doj, dob, phone;
+    private int id, bill ;
+    private String fname, lname, addr, test, dept, sex, doj, dob, phone;
 
-    public Staff(int id, String fname,String phone, String lname, String addr, String edu, String skill, String dept, String sex, String doj, String dob) {
+    public Patient(int id, int bill, String fname, String lname, String addr, String test, String dept, String sex, String doj, String dob, String phone) {
         this.id = id;
-        this.phone = phone;
+        this.bill = bill;
         this.fname = fname;
         this.lname = lname;
         this.addr = addr;
-        this.edu = edu;
-        this.skill = skill;
+        this.test = test;
         this.dept = dept;
         this.sex = sex;
         this.doj = doj;
         this.dob = dob;
+        this.phone = phone;
     }
 
-    public Staff() {
+    public Patient() {
     }
 
     public int getId() {
@@ -39,12 +39,12 @@ public class Staff {
         this.id = id;
     }
 
-    public String getPhone() {
-        return phone;
+    public int getBill() {
+        return bill;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setBill(int bill) {
+        this.bill = bill;
     }
 
     public String getFname() {
@@ -71,20 +71,12 @@ public class Staff {
         this.addr = addr;
     }
 
-    public String getEdu() {
-        return edu;
+    public String getTest() {
+        return test;
     }
 
-    public void setEdu(String edu) {
-        this.edu = edu;
-    }
-
-    public String getSkill() {
-        return skill;
-    }
-
-    public void setSkill(String skill) {
-        this.skill = skill;
+    public void setTest(String test) {
+        this.test = test;
     }
 
     public String getDept() {
@@ -118,6 +110,16 @@ public class Staff {
     public void setDob(String dob) {
         this.dob = dob;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    
     
     
 

@@ -66,7 +66,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtEdu" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                                  <Component id="txtTest" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDob" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtPno" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
                                   <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtSkill" min="-2" pref="650" max="-2" attributes="0"/>
+                                  <Component id="txtBill" min="-2" pref="650" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -133,12 +133,12 @@
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEdu" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTest" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSkill" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBill" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -247,12 +247,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Education"/>
+        <Property name="text" type="java.lang.String" value="Test"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Technical Skill"/>
+        <Property name="text" type="java.lang.String" value="Bill"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtDep">
@@ -270,9 +270,9 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtDob">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtEdu">
+    <Component class="javax.swing.JTextField" name="txtTest">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSkill">
+    <Component class="javax.swing.JTextField" name="txtBill">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
