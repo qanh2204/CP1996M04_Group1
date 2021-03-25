@@ -5,6 +5,8 @@
  */
 package LifeLine.Control;
 
+import LifeLine.view.DangNhapJDialog;
+import LifeLine.view.Form_docter;
 import LifeLine.view.Report_form;
 import LifeLine.view.Test_Form;
 import java.awt.BorderLayout;
@@ -13,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Control_Docter {

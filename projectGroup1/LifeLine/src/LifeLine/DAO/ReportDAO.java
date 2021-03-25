@@ -65,47 +65,6 @@ public class ReportDAO {
         return test;
     }
 
-    public static List<String> findName() {
-        List<String> name = new ArrayList<>();
-
-        Connection connection = null;
-        Statement statement = null;
-
-        try {
-            connection = lifeLine.DAO.JDBCConection.getConnection();
-
-            String sql = "select t_name from test";
-            statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                String n = resultSet.getString("t_name");
-                name.add(n);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        //ket thuc.
-
-        return name;
-    }
 
     public static int findID(String name) {
         int id = 0;
@@ -190,6 +149,83 @@ public class ReportDAO {
         //ket thuc.
     }
 
-    
+    public static void insert(Report s) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            //lay tat ca danh sach sinh vien
+            connection = lifeLine.DAO.JDBCConection.getConnection();
+
+            //query
+            String sql = "insert into report values(?, ?, ?)";
+            statement = connection.prepareCall(sql);
+
+            statement.setInt(1, s.getPatient_id());
+            statement.setNString(2, s.getReport());
+            statement.setInt(3, s.getTest_id());
+
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+    }
+
+
+    //xóa hết sản phẩm có trong hóa đơn
+    public static void delete(int id_patient, int id_test) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            //lay tat ca danh sach sinh vien
+            connection = lifeLine.DAO.JDBCConection.getConnection();
+
+            //query
+            String sql = "delete from report where patient_id=? and test_id = ?";
+            statement = connection.prepareCall(sql);
+
+            statement.setInt(1, id_patient);
+            statement.setInt(2, id_patient);
+
+            statement.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ReportDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+    }
     
 }

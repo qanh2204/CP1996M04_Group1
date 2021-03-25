@@ -51,7 +51,7 @@ public class Report_form extends javax.swing.JPanel {
     }
 
     public void showData() {
-        List<String> data = ReportDAO.findName();
+        List<String> data = TestDAO.findName();
         cmbTest.addItem("");
         for (String s : data) {
             cmbTest.addItem(s);

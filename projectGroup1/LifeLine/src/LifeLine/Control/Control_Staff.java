@@ -5,7 +5,7 @@
  */
 package LifeLine.Control;
 
-import LifeLine.view.Bill;
+import LifeLine.view.Bill_Form;
 import LifeLine.view.ListStaffJPanel;
 import LifeLine.view.ListPatientJPanel;
 import LifeLine.view.ListStockJPanel;
@@ -30,13 +30,13 @@ public class Control_Staff {
 
     public void setView(JPanel jpnItem, JLabel jlbItem) {
         kindSelected = "Staff";
-        jpnItem.setBackground(new Color(247, 242, 212));
-        jlbItem.setBackground(new Color(247, 242, 212));
+        jpnItem.setBackground(new Color(155, 215, 112));
+        jlbItem.setBackground(new Color(155, 215, 112));
         jlbItem.setForeground(Color.BLACK);
 
         root.removeAll();
         root.setLayout(new BorderLayout());
-        //root.add(null);
+        root.add(new ListStaffJPanel());
         root.validate();
         root.repaint();
     }
@@ -75,7 +75,7 @@ public class Control_Staff {
                     node =  new ListStockJPanel();
                     break;
                 case "Bill":
-                    node =  new Bill();
+                    node =  new Bill_Form();
                     break;    
                 default:
                     break;
@@ -91,8 +91,8 @@ public class Control_Staff {
         @Override
         public void mousePressed(MouseEvent e) {
             kindSelected = kind;
-            jpnItem.setBackground(new Color(247, 242, 212));
-            jlbItem.setBackground(new Color(247, 242, 212));
+            jpnItem.setBackground(new Color(155, 215, 112));
+            jlbItem.setBackground(new Color(155, 215, 112));
             jlbItem.setForeground(Color.BLACK);
         }
 
@@ -103,16 +103,16 @@ public class Control_Staff {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            jpnItem.setBackground(new Color(247, 242, 212));
-            jlbItem.setBackground(new Color(247, 242, 212));
+            jpnItem.setBackground(new Color(155, 215, 112));
+            jlbItem.setBackground(new Color(155, 215, 112));
             jlbItem.setForeground(Color.BLACK);
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             if (!kindSelected.equalsIgnoreCase(kind)) {
-                jpnItem.setBackground(new Color(32, 32, 96));
-                jlbItem.setBackground(new Color(32, 32, 96));
+                jpnItem.setBackground(new Color(27, 52, 9));
+                jlbItem.setBackground(new Color(27, 52, 9));
                 jlbItem.setForeground(Color.WHITE);
             }
         }
@@ -122,12 +122,12 @@ public class Control_Staff {
     private void setChangeBackground(String kind) {
         for (DanhMucBean item : listItem) {
             if (item.getKind().equalsIgnoreCase(kind)) {
-                item.getJpn().setBackground(new Color(247, 242, 212));
-                item.getJlb().setBackground(new Color(247, 242, 212));
+                item.getJpn().setBackground(new Color(155, 215, 112));
+                item.getJlb().setBackground(new Color(155, 215, 112));
                 item.getJlb().setForeground(Color.BLACK);
             } else {
-                item.getJpn().setBackground(new Color(32, 32, 96));
-                item.getJlb().setBackground(new Color(32, 32, 96));
+                item.getJpn().setBackground(new Color(27, 52, 9));
+                item.getJlb().setBackground(new Color(27, 52, 9));
                 item.getJlb().setForeground(Color.WHITE);
             }
         }

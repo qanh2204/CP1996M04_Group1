@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import LifeLine.model.Stock;
 import lifeLine.DAO.JDBCConection;
-import LifeLine.service.StockService;
 
 /**
  *
@@ -24,18 +23,13 @@ public class StockDao {
     public List<Stock> getAllStocks() {
         List<Stock> stocks = new ArrayList<Stock>();
         Connection conn = lifeLine.DAO.JDBCConection.getConnection();
-        String sql = "select * from Stock";
+        String sql = "select * from stock";
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
             ResultSet rs = pStatement.executeQuery();
             while (rs.next()) {
-                Stock stock = new Stock();
-                stock.setId(rs.getInt("item_code"));
-                stock.setIname(rs.getString("iname"));
-                stock.setIcost(rs.getInt("icost"));
-                stock.setInum(rs.getInt("inum"));
-                stock.setDnum(rs.getInt("dnum"));
-                
+                Stock stock = new Stock(rs.getInt("item_code"),rs.getInt("icost"), rs.getInt("dnum"),rs.getInt("inum"),rs.getString("iname") );
+            
                 stocks.add(stock);
             }
         } catch (SQLException e) {

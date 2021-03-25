@@ -5,51 +5,52 @@
  */
 package LifeLine.DAO;
 
+import LifeLine.model.Bill;
+import LifeLine.model.Test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import LifeLine.model.Test;
-import java.sql.Statement;
-import lifeLine.DAO.JDBCConection;
 
 /**
  *
  * @author Windows
  */
-public class TestDAO {
-
-    public static List<Test> findAll() {
-        List<Test> test = new ArrayList<>();
+public class BillDAO {
+    
+    public static List<Bill> findAll() {
+        List<Bill> bill = new ArrayList<>();
 
         Connection connection = null;
         Statement statement = null;
 
         try {
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
-            String sql = "select * from test ";
+            String sql = "select * from billing ";
             statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                Test ct;
-                ct = new Test(resultSet.getInt("test_id"), resultSet.getString("t_name"), resultSet.getInt("cost"));
-                test.add(ct);
+                Bill ct;
+                ct = new Bill(resultSet.getInt("bill_no"), resultSet.getInt("patient_id"), 
+                        resultSet.getInt("test_id"), resultSet.getInt("amount"));
+                bill.add(ct);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -57,13 +58,13 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         //ket thuc.
 
-        return test;
+        return bill;
     }
 
     public static String findName(int test_id) {
@@ -73,7 +74,7 @@ public class TestDAO {
         PreparedStatement statement = null;
 
         try {
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
             String sql = "select t_name from test where test_id = ?";
             statement = connection.prepareCall(sql);
@@ -85,13 +86,13 @@ public class TestDAO {
                 name = resultSet.getString("t_name");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -99,55 +100,13 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         //ket thuc.
 
         return name;
-    }
-    
-    public static int getCost(int test_id) {
-        int cost=0;
-
-        Connection connection = null;
-        PreparedStatement statement = null;
-
-        try {
-            connection = JDBCConection.getConnection();
-
-            String sql = "select cost from test where test_id = ?";
-            statement = connection.prepareCall(sql);
-            statement.setInt(1, test_id);
-
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                cost = resultSet.getInt("cost");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        //ket thuc.
-
-        return cost;
     }
 
     public static int findID(String name) {
@@ -157,7 +116,7 @@ public class TestDAO {
         PreparedStatement statement = null;
 
         try {
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
             String sql = "select test_id from test where t_name = ?";
             statement = connection.prepareCall(sql);
@@ -169,13 +128,13 @@ public class TestDAO {
                 id = resultSet.getInt("test_id");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -183,7 +142,7 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -192,31 +151,32 @@ public class TestDAO {
         return id;
     }
     
-    public static void insert(Test s) {
+    public static void insert(Bill s) {
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
             //lay tat ca danh sach sinh vien
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
             //query
-            String sql = "insert into test values(?, ?, ?)";
+            String sql = "insert into billing values(?, ?, ?, ?)";
             statement = connection.prepareCall(sql);
 
-            statement.setInt(1, s.getTest_id());
-            statement.setNString(2, s.getT_name());
-            statement.setInt(3, s.getCost());
+            statement.setInt(1, s.getBill_no());
+            statement.setInt(2, s.getPatient_id());
+            statement.setInt(3, s.getTest_id());
+            statement.setInt(4, s.getAmount());
 
             statement.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -224,38 +184,39 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         //ket thuc.
     }
 
-    public static void update(Test ct) {
+    public static void update(Bill ct) {
         Connection connection = null;
         PreparedStatement statement = null;
 
         try {
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
             //query
-            String sql = "update test set test_id=?, t_name=?, cost=? where test_id=?";
+            String sql = "update billing set bill_no=?, patient_id=?, test_id=?, amount=? where bill_no=?";
             statement = connection.prepareCall(sql);
 
-            statement.setInt(1, ct.getTest_id());
-            statement.setString(2, ct.getT_name());
-            statement.setInt(3, (int) ct.getCost());
-            statement.setInt(4, (int) ct.getTest_id());
+            statement.setInt(1, ct.getBill_no());
+            statement.setInt(2, ct.getPatient_id());
+            statement.setInt(3, ct.getTest_id());
+            statement.setInt(4, ct.getAmount());
+            statement.setInt(5, ct.getBill_no());
 
             statement.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -263,7 +224,7 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -277,23 +238,23 @@ public class TestDAO {
 
         try {
             //lay tat ca danh sach sinh vien
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
             //query
-            String sql = "delete from test where test_id = ?";
+            String sql = "delete from billing where bill_no = ?";
             statement = connection.prepareCall(sql);
 
             statement.setInt(1, id);
 
             statement.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -301,7 +262,7 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -315,24 +276,24 @@ public class TestDAO {
         Statement statement = null;
 
         try {
-            connection = JDBCConection.getConnection();
+            connection = lifeLine.DAO.JDBCConection.getConnection();
 
-            String sql = "select test_id from test where test_id=(select max(test_id) from test)";
+            String sql = "select bill_no from billing where bill_no=(select max(bill_no) from billing)";
             statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
-                id_max = resultSet.getInt("test_id");
+                id_max = resultSet.getInt("bill_no");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (statement != null) {
                 try {
                     statement.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -340,7 +301,7 @@ public class TestDAO {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -348,47 +309,4 @@ public class TestDAO {
 
         return id_max;
     }
-    
-    public static List<String> findName() {
-        List<String> name = new ArrayList<>();
-
-        Connection connection = null;
-        Statement statement = null;
-
-        try {
-            connection = lifeLine.DAO.JDBCConection.getConnection();
-
-            String sql = "select t_name from test";
-            statement = connection.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
-
-            while (resultSet.next()) {
-                String n = resultSet.getString("t_name");
-                name.add(n);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(TestDAO.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        //ket thuc.
-
-        return name;
-    }
-    
 }

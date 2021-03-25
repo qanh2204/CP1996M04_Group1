@@ -62,9 +62,9 @@ public class MainStaffFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Menu.setBackground(new java.awt.Color(32, 32, 96));
+        Menu.setBackground(new java.awt.Color(27, 52, 9));
 
-        jpnStaff.setBackground(new java.awt.Color(32, 32, 96));
+        jpnStaff.setBackground(new java.awt.Color(27, 52, 9));
 
         jlbStaff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbStaff.setForeground(new java.awt.Color(255, 255, 255));
@@ -87,7 +87,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnPatient.setBackground(new java.awt.Color(32, 32, 96));
+        jpnPatient.setBackground(new java.awt.Color(27, 52, 9));
 
         jlbPatient.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbPatient.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,7 +110,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jpnStock.setBackground(new java.awt.Color(32, 32, 96));
+        jpnStock.setBackground(new java.awt.Color(27, 52, 9));
 
         jlbStock.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbStock.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,7 +130,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
             .addComponent(jlbStock, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
         );
 
-        jpnBill.setBackground(new java.awt.Color(32, 32, 96));
+        jpnBill.setBackground(new java.awt.Color(27, 52, 9));
 
         jlbBill.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbBill.setForeground(new java.awt.Color(255, 255, 255));
@@ -190,14 +190,14 @@ public class MainStaffFrame extends javax.swing.JFrame {
         View.setLayout(ViewLayout);
         ViewLayout.setHorizontalGroup(
             ViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1390, Short.MAX_VALUE)
         );
         ViewLayout.setVerticalGroup(
             ViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(253, 220, 34));
+        jPanel3.setBackground(new java.awt.Color(102, 176, 50));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -209,7 +209,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1309, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(10, 10, 10))
         );
         jPanel3Layout.setVerticalGroup(
@@ -225,13 +225,11 @@ public class MainStaffFrame extends javax.swing.JFrame {
         jpnRootLayout.setHorizontalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnRootLayout.createSequentialGroup()
-                .addGroup(jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jpnRootLayout.createSequentialGroup()
-                        .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(View, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(View, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jpnRootLayout.setVerticalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,7 +246,9 @@ public class MainStaffFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
