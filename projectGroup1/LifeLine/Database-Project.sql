@@ -82,3 +82,6 @@ create table Report(
    CONSTRAINT fk_ptid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
    CONSTRAINT fk_testid FOREIGN KEY (test_id) REFERENCES Test(test_id)
 );
+
+
+update Account set  pass = '12345' where username = 'van' and pass='1234' 
