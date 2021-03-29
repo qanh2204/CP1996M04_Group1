@@ -46,7 +46,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="Menu" min="-2" pref="247" max="-2" attributes="0"/>
+                  <Component id="Menu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="View" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -85,9 +85,10 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jpnBill" pref="0" max="32767" attributes="0"/>
-                          <Component id="jpnPatient" alignment="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jpnStock" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btnLogout3" max="32767" attributes="0"/>
+                          <Component id="jpnBill" pref="201" max="32767" attributes="0"/>
+                          <Component id="jpnPatient" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jpnStock" alignment="0" pref="201" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
@@ -96,13 +97,15 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="220" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="jpnPatient" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                       <Component id="jpnStock" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="jpnBill" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="119" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="btnLogout3" pref="87" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -120,7 +123,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jlbPatient" min="-2" pref="213" max="-2" attributes="0"/>
+                          <Component id="jlbPatient" min="-2" pref="170" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -161,14 +164,18 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jlbStock" min="-2" pref="189" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          <Component id="jlbStock" min="-2" pref="172" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jlbStock" alignment="1" pref="88" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="jlbStock" pref="72" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -198,8 +205,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jlbBill" min="-2" pref="212" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="jlbBill" min="-2" pref="172" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -227,6 +234,24 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnLogout3">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="9" green="34" red="1b" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Log out"/>
+                <Property name="horizontalAlignment" type="int" value="10"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogout3ActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="View">

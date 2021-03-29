@@ -31,7 +31,7 @@ public class DoctorDao {
                 Doctor doctor = new Doctor();
                 doctor.setId(rs.getInt("doctor_id"));
                 doctor.setDname(rs.getString("D_name"));
-                doctor.setAddr(rs.getString("addr"));
+                doctor.setAddr(rs.getString("address"));
                 doctor.setPhone(rs.getString("P_no"));
                 doctor.setSpe(rs.getString("specialization"));
                 

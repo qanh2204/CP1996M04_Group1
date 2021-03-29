@@ -9,6 +9,7 @@ import control.Control_Staff;
 import control.DanhMucBean;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,6 +53,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
         jlbStock = new javax.swing.JLabel();
         jpnBill = new javax.swing.JPanel();
         jlbBill = new javax.swing.JLabel();
+        btnLogout3 = new javax.swing.JButton();
         View = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -72,7 +74,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnPatientLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpnPatientLayout.setVerticalGroup(
@@ -95,12 +97,15 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnStockLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbStock, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addComponent(jlbStock, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
         jpnStockLayout.setVerticalGroup(
             jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+            .addGroup(jpnStockLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jlbStock, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addGap(8, 8, 8))
         );
 
         jpnBill.setBackground(new java.awt.Color(27, 52, 9));
@@ -115,8 +120,8 @@ public class MainStaffFrame extends javax.swing.JFrame {
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBillLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
         );
         jpnBillLayout.setVerticalGroup(
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,6 +131,17 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnLogout3.setBackground(new java.awt.Color(27, 52, 9));
+        btnLogout3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout3.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout3.setText("Log out");
+        btnLogout3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnLogout3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogout3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -133,21 +149,24 @@ public class MainStaffFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jpnPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jpnStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(btnLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE)
+                    .addComponent(jpnPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpnStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE))
                 .addGap(31, 31, 31))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
+                .addGap(73, 73, 73)
                 .addComponent(jpnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
                 .addComponent(jpnStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addGap(139, 139, 139))
         );
 
         View.setBackground(new java.awt.Color(153, 255, 255));
@@ -191,7 +210,7 @@ public class MainStaffFrame extends javax.swing.JFrame {
         jpnRootLayout.setHorizontalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnRootLayout.createSequentialGroup()
-                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(View, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -229,12 +248,22 @@ public class MainStaffFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogout3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogout3ActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Do you really want to logout?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            Login_Form login = new Login_Form();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_btnLogout3ActionPerformed
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel View;
+    private javax.swing.JButton btnLogout3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jlbBill;

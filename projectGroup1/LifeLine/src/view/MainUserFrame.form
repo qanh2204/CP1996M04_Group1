@@ -85,6 +85,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnLogout" max="32767" attributes="0"/>
                           <Component id="jpnBill" pref="0" max="32767" attributes="0"/>
                           <Component id="jpnStaff" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jpnDoctor" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -108,7 +109,9 @@
                       <Component id="jpnDoctor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
                       <Component id="jpnBill" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="119" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnLogout" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -245,8 +248,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jlbBill" min="-2" pref="212" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="jlbBill" min="-2" pref="185" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -269,11 +272,29 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Bill"/>
+                    <Property name="text" type="java.lang.String" value="Change Password"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnLogout">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="9" green="34" red="1b" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="18" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Log out"/>
+                <Property name="horizontalAlignment" type="int" value="10"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="View">

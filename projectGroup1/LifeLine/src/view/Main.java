@@ -12,11 +12,11 @@ package view;
 public class Main {
 
     public static void main(String[] args) {
-        DangNhapJDialog dialog = new DangNhapJDialog(null, true);
-        dialog.setTitle("Sign in");
-        dialog.setResizable(false);
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
+        Login_Form login = new Login_Form();
+        login.setTitle("Sign in");
+        login.setResizable(false);
+        login.setLocationRelativeTo(null);
+        login.setVisible(true);
     }
 
 }

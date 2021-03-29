@@ -5,7 +5,6 @@
  */
 package control;
 
-import view.DangNhapJDialog;
 import view.Form_docter;
 import view.Report_form;
 import view.Test_Form;
@@ -14,9 +13,11 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import view.Login_Form;
 
 public class Control_Docter {
 
@@ -52,6 +53,8 @@ public class Control_Docter {
     class LabelEvent implements MouseListener {
 
         private JPanel node;
+        
+        
         private String kind;
 
         private JPanel jpnItem;
@@ -71,13 +74,15 @@ public class Control_Docter {
                     break;
                 case "Test":
                     node = new Test_Form();
-                    break;
+                    break; 
+                
                 default:
                     break;
             }
             root.removeAll();
             root.setLayout(new BorderLayout());
             root.add(node);
+            
             root.validate();
             root.repaint();
             setChangeBackground(kind);

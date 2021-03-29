@@ -7,8 +7,15 @@ package view;
 
 import control.Control_Docter;
 import control.DanhMucBean;
+import dao.JDBCConection;
+import java.awt.Color;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -16,22 +23,18 @@ import java.util.List;
  */
 public class Form_docter extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Don_hang
-     */
     public Form_docter() {
         initComponents();
-        
-        setTitle("Quản lý bán hàng");
         setLocationRelativeTo(null);
-        
+
         Control_Docter control = new Control_Docter(View);
-        control.setView(jpnReport, jlbReport);
-        
+        control.setView(jpnInfo, jlbInfo);
+
         List<DanhMucBean> listItem = new ArrayList<>();
         listItem.add(new DanhMucBean("Report", jpnReport, jlbReport));
         listItem.add(new DanhMucBean("Test", jpnTest, jlbTest));
-        
+        listItem.add(new DanhMucBean("Logout", jpnInfo, jlbInfo));
+
         control.setEvent(listItem);
     }
 
@@ -50,6 +53,9 @@ public class Form_docter extends javax.swing.JFrame {
         jlbReport = new javax.swing.JLabel();
         jpnTest = new javax.swing.JPanel();
         jlbTest = new javax.swing.JLabel();
+        jpnInfo = new javax.swing.JPanel();
+        jlbInfo = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         View = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -59,6 +65,11 @@ public class Form_docter extends javax.swing.JFrame {
         Menu.setBackground(new java.awt.Color(27, 52, 9));
 
         jpnReport.setBackground(new java.awt.Color(27, 52, 9));
+        jpnReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnReportMouseClicked(evt);
+            }
+        });
 
         jlbReport.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbReport.setForeground(new java.awt.Color(255, 255, 255));
@@ -82,6 +93,11 @@ public class Form_docter extends javax.swing.JFrame {
         );
 
         jpnTest.setBackground(new java.awt.Color(27, 52, 9));
+        jpnTest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnTestMouseClicked(evt);
+            }
+        });
 
         jlbTest.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbTest.setForeground(new java.awt.Color(255, 255, 255));
@@ -91,7 +107,10 @@ public class Form_docter extends javax.swing.JFrame {
         jpnTest.setLayout(jpnTestLayout);
         jpnTestLayout.setHorizontalGroup(
             jpnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbTest, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+            .addGroup(jpnTestLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbTest, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpnTestLayout.setVerticalGroup(
             jpnTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,28 +120,73 @@ public class Form_docter extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jpnInfo.setBackground(new java.awt.Color(27, 52, 9));
+        jpnInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jpnInfoMouseClicked(evt);
+            }
+        });
+
+        jlbInfo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbInfo.setForeground(new java.awt.Color(255, 255, 255));
+        jlbInfo.setText("Change Password");
+
+        javax.swing.GroupLayout jpnInfoLayout = new javax.swing.GroupLayout(jpnInfo);
+        jpnInfo.setLayout(jpnInfoLayout);
+        jpnInfoLayout.setHorizontalGroup(
+            jpnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jpnInfoLayout.setVerticalGroup(
+            jpnInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnInfoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btnLogout.setBackground(new java.awt.Color(27, 52, 9));
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setText("Log out");
+        btnLogout.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpnTest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(MenuLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jpnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(MenuLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpnTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jpnReport, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpnInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addComponent(jpnReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
+                .addGap(47, 47, 47)
                 .addComponent(jpnTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addGap(84, 84, 84)
+                .addComponent(jpnInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         View.setBackground(new java.awt.Color(153, 255, 255));
@@ -131,11 +195,11 @@ public class Form_docter extends javax.swing.JFrame {
         View.setLayout(ViewLayout);
         ViewLayout.setHorizontalGroup(
             ViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1066, Short.MAX_VALUE)
         );
         ViewLayout.setVerticalGroup(
             ViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jPanel3.setBackground(new java.awt.Color(102, 176, 50));
@@ -167,11 +231,12 @@ public class Form_docter extends javax.swing.JFrame {
         jpnRootLayout.setHorizontalGroup(
             jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnRootLayout.createSequentialGroup()
-                .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(View, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jpnRootLayout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpnRootLayout.createSequentialGroup()
+                        .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(View, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jpnRootLayout.setVerticalGroup(
@@ -179,9 +244,9 @@ public class Form_docter extends javax.swing.JFrame {
             .addGroup(jpnRootLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(View, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jpnRootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(View, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -189,31 +254,51 @@ public class Form_docter extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 1378, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, 721, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpnRoot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+    private void jpnReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnReportMouseClicked
+
+    }//GEN-LAST:event_jpnReportMouseClicked
+
+    private void jpnTestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnTestMouseClicked
+
+    }//GEN-LAST:event_jpnTestMouseClicked
+
+    private void jpnInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnInfoMouseClicked
+
+    }//GEN-LAST:event_jpnInfoMouseClicked
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Do you really want to logout?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            Login_Form login = new Login_Form();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel View;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jlbInfo;
     private javax.swing.JLabel jlbReport;
     private javax.swing.JLabel jlbTest;
+    private javax.swing.JPanel jpnInfo;
     private javax.swing.JPanel jpnReport;
     private javax.swing.JPanel jpnRoot;
     private javax.swing.JPanel jpnTest;

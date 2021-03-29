@@ -9,6 +9,7 @@ import control.Control_User;
 import control.DanhMucBean;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,6 +57,7 @@ public class MainUserFrame extends javax.swing.JFrame {
         jlbDoctor = new javax.swing.JLabel();
         jpnBill = new javax.swing.JPanel();
         jlbBill = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         View = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -134,7 +136,7 @@ public class MainUserFrame extends javax.swing.JFrame {
 
         jlbBill.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlbBill.setForeground(new java.awt.Color(255, 255, 255));
-        jlbBill.setText("Bill");
+        jlbBill.setText("Change Password");
 
         javax.swing.GroupLayout jpnBillLayout = new javax.swing.GroupLayout(jpnBill);
         jpnBill.setLayout(jpnBillLayout);
@@ -142,8 +144,8 @@ public class MainUserFrame extends javax.swing.JFrame {
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnBillLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                .addComponent(jlbBill, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71))
         );
         jpnBillLayout.setVerticalGroup(
             jpnBillLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,6 +155,17 @@ public class MainUserFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnLogout.setBackground(new java.awt.Color(27, 52, 9));
+        btnLogout.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setText("Log out");
+        btnLogout.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
@@ -160,6 +173,7 @@ public class MainUserFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jpnStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jpnDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -179,7 +193,9 @@ public class MainUserFrame extends javax.swing.JFrame {
                 .addComponent(jpnDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
 
         View.setBackground(new java.awt.Color(153, 255, 255));
@@ -261,12 +277,22 @@ public class MainUserFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Do you really want to logout?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            this.setVisible(false);
+            Login_Form login = new Login_Form();
+            login.setVisible(true);
+            login.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Menu;
     private javax.swing.JPanel View;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jlbBill;

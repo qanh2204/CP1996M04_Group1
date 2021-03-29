@@ -1,6 +1,13 @@
 create database Pathology;
 use Pathology;
 
+create table Account(
+  id varchar(6) not null primary key,
+  username varchar(30) not null,
+  pass varchar(30) not null,
+  type char(3) not null
+);
+
 create table Staff(
     staff_id int primary key,
 	F_name varchar(20) not null,
@@ -12,7 +19,9 @@ create table Staff(
 	gender char(10) not null,
 	Dob date not null,
 	Edu_qual varchar(30) not null,
-	Tech_skills varchar(30) not null
+	Tech_skills varchar(30) not null,
+	id varchar(6) not null,
+	FOREIGN KEY (id) REFERENCES Account(id)
 );
 
 create table Patient(
@@ -24,18 +33,22 @@ create table Patient(
 	addr varchar(60) not null,
 	P_no varchar(11) not null,
 	gender char(10) not null,
-	Dob date not null,
-	test varchar(20) not null,
-	bill int not null
+	Dob date not null
 );
 
 create table Billing(
    bill_no int primary key,
    patient_id int not null,
-   test_id int not null,
-   amount int not null,
+   amount int,
    CONSTRAINT fk_patientid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
-   CONSTRAINT fk_test FOREIGN KEY (test_id) REFERENCES Test(test_id)
+);
+
+create table BillDetail(
+	bill_no int,
+	test_id int not null,
+	doctor_id int not null,
+	FOREIGN KEY (test_id) REFERENCES Test(test_id),
+	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
 );
 
 create table Test(
@@ -52,12 +65,14 @@ create table Stock(
    dnum int not null
 );
 
-create table Docter(
-   docter_id int primary key, 
+create table Doctor(
+   doctor_id int primary key, 
    D_name varchar(40),
    address varchar(40) not null,
    P_no varchar(11) not null,
-   specialization varchar(35) not null
+   specialization varchar(35) not null,
+   id varchar(6) not null,
+   FOREIGN KEY (id) REFERENCES Account(id)
 );
 
 create table Report(
@@ -67,13 +82,3 @@ create table Report(
    CONSTRAINT fk_ptid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
    CONSTRAINT fk_testid FOREIGN KEY (test_id) REFERENCES Test(test_id)
 );
-
-
-create table Account(
-  id int not null primary key,
-  username varchar(30) not null,
-  pass varchar(30) not null,
-  type char(3) not null
-);
-
-

@@ -67,7 +67,7 @@ public class Control_User {
         @Override
         public void mouseClicked(MouseEvent e) {
             switch (kind) {
-                case "Staf":
+                case "Staff":
                     node =  new ListStaffJPanel();
                     break;
                 case "User":
