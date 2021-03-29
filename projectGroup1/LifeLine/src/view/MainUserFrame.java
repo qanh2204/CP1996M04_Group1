@@ -5,7 +5,7 @@
  */
 package view;
 
-import control.Control_Staff;
+import control.Control_User;
 import control.DanhMucBean;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +14,24 @@ import java.util.List;
  *
  * @author Windows
  */
-public class MainStaffFrame extends javax.swing.JFrame {
+public class MainUserFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form Don_hang
      */
-    public MainStaffFrame() {
+    public MainUserFrame() {
         initComponents();
         
         setTitle("Life Line");
         setLocationRelativeTo(null);
         
-        Control_Staff control = new Control_Staff(View);
+        Control_User control = new Control_User(View);
+        control.setView(jpnUser, jlbUser);
         
         List<DanhMucBean> listItem = new ArrayList<>();
-        listItem.add(new DanhMucBean("Patient", jpnPatient, jlbPatient));
-        listItem.add(new DanhMucBean("Stock", jpnStock, jlbStock));
+        listItem.add(new DanhMucBean("User", jpnUser, jlbUser));
+        listItem.add(new DanhMucBean("Staff", jpnStaff, jlbStaff));
+        listItem.add(new DanhMucBean("Doctor", jpnDoctor, jlbDoctor));
         listItem.add(new DanhMucBean("Bill", jpnBill, jlbBill));
         
         control.setEvent(listItem);
@@ -46,10 +48,12 @@ public class MainStaffFrame extends javax.swing.JFrame {
 
         jpnRoot = new javax.swing.JPanel();
         Menu = new javax.swing.JPanel();
-        jpnPatient = new javax.swing.JPanel();
-        jlbPatient = new javax.swing.JLabel();
-        jpnStock = new javax.swing.JPanel();
-        jlbStock = new javax.swing.JLabel();
+        jpnUser = new javax.swing.JPanel();
+        jlbUser = new javax.swing.JLabel();
+        jpnStaff = new javax.swing.JPanel();
+        jlbStaff = new javax.swing.JLabel();
+        jpnDoctor = new javax.swing.JPanel();
+        jlbDoctor = new javax.swing.JLabel();
         jpnBill = new javax.swing.JPanel();
         jlbBill = new javax.swing.JLabel();
         View = new javax.swing.JPanel();
@@ -60,47 +64,70 @@ public class MainStaffFrame extends javax.swing.JFrame {
 
         Menu.setBackground(new java.awt.Color(27, 52, 9));
 
-        jpnPatient.setBackground(new java.awt.Color(27, 52, 9));
+        jpnUser.setBackground(new java.awt.Color(27, 52, 9));
 
-        jlbPatient.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbPatient.setForeground(new java.awt.Color(255, 255, 255));
-        jlbPatient.setText("Patient");
+        jlbUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbUser.setForeground(new java.awt.Color(255, 255, 255));
+        jlbUser.setText("User management");
 
-        javax.swing.GroupLayout jpnPatientLayout = new javax.swing.GroupLayout(jpnPatient);
-        jpnPatient.setLayout(jpnPatientLayout);
-        jpnPatientLayout.setHorizontalGroup(
-            jpnPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnPatientLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnUserLayout = new javax.swing.GroupLayout(jpnUser);
+        jpnUser.setLayout(jpnUserLayout);
+        jpnUserLayout.setHorizontalGroup(
+            jpnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlbUser, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jpnPatientLayout.setVerticalGroup(
-            jpnPatientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnPatientLayout.createSequentialGroup()
+        jpnUserLayout.setVerticalGroup(
+            jpnUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnUserLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jlbPatient, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addComponent(jlbUser, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jpnStock.setBackground(new java.awt.Color(27, 52, 9));
+        jpnStaff.setBackground(new java.awt.Color(27, 52, 9));
 
-        jlbStock.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jlbStock.setForeground(new java.awt.Color(255, 255, 255));
-        jlbStock.setText("Stock");
+        jlbStaff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbStaff.setForeground(new java.awt.Color(255, 255, 255));
+        jlbStaff.setText("Staff");
 
-        javax.swing.GroupLayout jpnStockLayout = new javax.swing.GroupLayout(jpnStock);
-        jpnStock.setLayout(jpnStockLayout);
-        jpnStockLayout.setHorizontalGroup(
-            jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnStockLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpnStaffLayout = new javax.swing.GroupLayout(jpnStaff);
+        jpnStaff.setLayout(jpnStaffLayout);
+        jpnStaffLayout.setHorizontalGroup(
+            jpnStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbStaff, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpnStaffLayout.setVerticalGroup(
+            jpnStaffLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnStaffLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jpnDoctor.setBackground(new java.awt.Color(27, 52, 9));
+
+        jlbDoctor.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbDoctor.setForeground(new java.awt.Color(255, 255, 255));
+        jlbDoctor.setText("Doctor");
+
+        javax.swing.GroupLayout jpnDoctorLayout = new javax.swing.GroupLayout(jpnDoctor);
+        jpnDoctor.setLayout(jpnDoctorLayout);
+        jpnDoctorLayout.setHorizontalGroup(
+            jpnDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnDoctorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jlbStock, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlbDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
-        jpnStockLayout.setVerticalGroup(
-            jpnStockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlbStock, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+        jpnDoctorLayout.setVerticalGroup(
+            jpnDoctorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jlbDoctor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
         );
 
         jpnBill.setBackground(new java.awt.Color(27, 52, 9));
@@ -134,17 +161,22 @@ public class MainStaffFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jpnPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jpnStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jpnStaff, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jpnDoctor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, MenuLayout.createSequentialGroup()
+                        .addComponent(jpnUser, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(31, 31, 31))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(220, 220, 220)
-                .addComponent(jpnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(jpnUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jpnStaff, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
-                .addComponent(jpnStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpnDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(63, 63, 63)
                 .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(119, Short.MAX_VALUE))
@@ -238,11 +270,13 @@ public class MainStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jlbBill;
-    private javax.swing.JLabel jlbPatient;
-    private javax.swing.JLabel jlbStock;
+    private javax.swing.JLabel jlbDoctor;
+    private javax.swing.JLabel jlbStaff;
+    private javax.swing.JLabel jlbUser;
     private javax.swing.JPanel jpnBill;
-    private javax.swing.JPanel jpnPatient;
+    private javax.swing.JPanel jpnDoctor;
     private javax.swing.JPanel jpnRoot;
-    private javax.swing.JPanel jpnStock;
+    private javax.swing.JPanel jpnStaff;
+    private javax.swing.JPanel jpnUser;
     // End of variables declaration//GEN-END:variables
 }

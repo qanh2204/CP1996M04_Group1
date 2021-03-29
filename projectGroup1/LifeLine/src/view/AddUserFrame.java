@@ -172,7 +172,7 @@ public class AddUserFrame extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        new ListUserFrame().setVisible(true);
+        new ListUserJPanel().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
@@ -193,7 +193,7 @@ public class AddUserFrame extends javax.swing.JFrame {
         user.setType(type);
         userService.addUser(user);
         
-        new ListUserFrame().setVisible(true);
+        new ListUserJPanel().setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_sbBtnActionPerformed

@@ -164,7 +164,7 @@ public class DangNhapJDialog extends javax.swing.JDialog {
         } else if (type.equals("adm")) {
             this.dispose();
             //ListUserFrame userFrame = new ListUserFrame();
-            view.ListUserFrame userFrame = new view.ListUserFrame();
+            view.MainUserFrame userFrame = new view.MainUserFrame();
             userFrame.setTitle("Admin Form");
             userFrame.setResizable(false);
             userFrame.setLocationRelativeTo(null);

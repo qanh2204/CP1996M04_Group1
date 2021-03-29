@@ -176,7 +176,7 @@ public class EditUserFrame extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
-        new view.ListUserFrame().setVisible(true);
+        new view.ListUserJPanel().setVisible(true);
         this.dispose();
     }                                       
 
@@ -197,7 +197,7 @@ public class EditUserFrame extends javax.swing.JFrame {
         user.setType(type);
         userService.updateUser(user);
 
-        new view.ListUserFrame().setVisible(true);
+        new view.ListUserJPanel().setVisible(true);
         this.dispose();
 
     }                                     
