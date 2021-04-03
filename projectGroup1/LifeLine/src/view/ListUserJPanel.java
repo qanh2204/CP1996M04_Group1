@@ -42,14 +42,19 @@ public class ListUserJPanel extends javax.swing.JPanel {
         dTableModel.addColumn("Password");
         dTableModel.addColumn("Type");
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-
+        
         setTableData(userService.getAllUsers());
     }
 
     private void setTableData(List<User> users) {
-        for (User user:users) {
+        for (User user : users) {
             dTableModel.addRow(new Object[]{user.getId(), user.getUser(), user.getPass(), user.getType()});
         }
+    }
+    
+    public void refresh(){
+        dTableModel.setRowCount(0);
+        setTableData(userService.getAllUsers());
     }
 
     /**
@@ -168,6 +173,9 @@ public class ListUserJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         new AddUserFrame().setVisible(true);
         this.disable();
+        dTableModel.setRowCount(0);
+        setTableData(userService.getAllUsers());
+
     }//GEN-LAST:event_addBtnActionPerformed
 
     private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
@@ -176,9 +184,12 @@ public class ListUserJPanel extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(ListUserJPanel.this, "Please select user first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            int userId = Integer.valueOf(String.valueOf(userTable.getValueAt(row, 0)));
+            String userId = String.valueOf(userTable.getValueAt(row, 0));
             new EditUserFrame(userId).setVisible(true);
             this.disable();
+            dTableModel.setRowCount(0);
+            setTableData(userService.getAllUsers());
+
         }
     }//GEN-LAST:event_editBtnActionPerformed
 
@@ -191,9 +202,9 @@ public class ListUserJPanel extends javax.swing.JPanel {
             int confirm = JOptionPane.showConfirmDialog(ListUserJPanel.this, "Are you sure ?");
 
             if (confirm == JOptionPane.YES_OPTION) {
-                int userId = Integer.valueOf(String.valueOf(userTable.getValueAt(row, 0)));
-
+                String userId = String.valueOf(userTable.getValueAt(row, 0));
                 userService.deleteUser(userId);
+
                 dTableModel.setRowCount(0);
                 setTableData(userService.getAllUsers());
             }

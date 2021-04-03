@@ -14,33 +14,46 @@ import model.User;
  * @author qanh2
  */
 public class UserService {
+
     private UserDao userDao;
-    
-    public UserService(){
+
+    public UserService() {
         userDao = new UserDao();
     }
-    
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
-    
-    public void addUser(User user){
+
+    public void addUser(User user) {
         userDao.addUser(user);
     }
-    
-    public void deleteUser(int id){
+
+    public void deleteUser(String id) {
         userDao.deleteUser(id);
     }
-    
-    public User getUserById(int id){
+
+    public User getUserById(String id) {
         return userDao.getUsersById(id);
     }
-    
-    public void updateUser(User user){
+
+    public void updateUser(User user) {
         userDao.updateUser(user);
     }
-    
-    public String getType(String user, String pass){
+
+    public String getType(String user, String pass) {
         return userDao.getType(user, pass);
+    }
+
+    public List<String> getIdUserForStaff() {
+        return userDao.getIdUsersForStaff();
+    }
+
+    public List<String> getIdUserForDoctor() {
+        return userDao.getIdUsersForDoctor();
+    }
+
+    public void setPassword(String user, String oldpass, String newpass) {
+        userDao.setPass(user, oldpass, newpass);
     }
 }

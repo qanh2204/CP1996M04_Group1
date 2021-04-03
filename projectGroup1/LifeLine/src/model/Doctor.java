@@ -12,10 +12,11 @@ package model;
 public class Doctor {
 
     private int id ;
-    private String dname, spe, addr, phone;
+    private String dname, spe, addr, phone, accountId;
 
-    public Doctor(int id, String dname, String spe, String addr, String phone) {
+    public Doctor(int id, String accountId, String dname, String spe, String addr, String phone) {
         this.id = id;
+        this.accountId = accountId;
         this.dname = dname;
         this.spe = spe;
         this.addr = addr;
@@ -25,6 +26,15 @@ public class Doctor {
     public Doctor() {
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    
     public int getId() {
         return id;
     }

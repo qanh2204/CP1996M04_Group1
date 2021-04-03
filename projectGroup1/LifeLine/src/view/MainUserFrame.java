@@ -33,7 +33,7 @@ public class MainUserFrame extends javax.swing.JFrame {
         listItem.add(new DanhMucBean("User", jpnUser, jlbUser));
         listItem.add(new DanhMucBean("Staff", jpnStaff, jlbStaff));
         listItem.add(new DanhMucBean("Doctor", jpnDoctor, jlbDoctor));
-        listItem.add(new DanhMucBean("Bill", jpnBill, jlbBill));
+        listItem.add(new DanhMucBean("ChangePassword", jpnBill, jlbBill));
         
         control.setEvent(listItem);
     }

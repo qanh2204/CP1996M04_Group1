@@ -39,4 +39,12 @@ public class DoctorService {
     public void updateDoctor(Doctor doctor){
         doctorDao.updateDoctor(doctor);
     }
+    
+    public List<String> getAllDoctor(){
+        return doctorDao.findName();
+    }
+    
+    public int getID(String name){
+        return doctorDao.findID(name);
+    }
 }

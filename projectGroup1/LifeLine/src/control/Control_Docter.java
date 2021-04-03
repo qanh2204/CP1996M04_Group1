@@ -17,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import view.ChangePassword;
 import view.Login_Form;
 
 public class Control_Docter {
@@ -75,7 +76,8 @@ public class Control_Docter {
                 case "Test":
                     node = new Test_Form();
                     break; 
-                
+                case "ChangePassword":
+                    node = new ChangePassword();
                 default:
                     break;
             }

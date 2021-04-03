@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Staff;
-import dao.JDBCConection;
 
 /**
  *
@@ -40,6 +39,7 @@ public class StaffDao {
                 staff.setDob(rs.getString("Dob"));
                 staff.setEdu(rs.getString("Edu_qual"));
                 staff.setSkill(rs.getString("Tech_skills"));
+                staff.setAccountId(rs.getString("id"));
                 
                 staffs.add(staff);
             }
@@ -52,7 +52,7 @@ public class StaffDao {
     public void updateStaff(Staff staff) {
         //Connection conn = JDBCConection.getConnection();
         Connection conn = dao.JDBCConection.getConnection();
-        String sql = "update Staff set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ?, Edu_qual = ?, Tech_skills = ? where staff_id = ?";
+        String sql = "update Staff set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ?, Edu_qual = ?, Tech_skills = ?, id = ? where staff_id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -67,7 +67,8 @@ public class StaffDao {
             pStatement.setString(8, staff.getDob());
             pStatement.setString(9, staff.getEdu());
             pStatement.setString(10, staff.getSkill());
-            pStatement.setInt(11, staff.getId());
+            pStatement.setString(11, staff.getAccountId());
+            pStatement.setInt(12, staff.getId());
             
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
@@ -91,7 +92,7 @@ public class StaffDao {
     
     public void addStaff(Staff staff) {
         Connection conn = JDBCConection.getConnection();
-        String sql = "insert into Staff(staff_id ,F_name ,L_name,Doj ,Dept ,addr ,P_no ,gender ,Dob ,Edu_qual ,Tech_skills) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into Staff(staff_id ,F_name ,L_name,Doj ,Dept ,addr ,P_no ,gender ,Dob ,Edu_qual ,Tech_skills,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -106,6 +107,7 @@ public class StaffDao {
             pStatement.setString(9, staff.getDob());
             pStatement.setString(10, staff.getEdu());
             pStatement.setString(11, staff.getSkill());
+            pStatement.setString(12, staff.getAccountId());
 
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
@@ -136,6 +138,7 @@ public class StaffDao {
                 staff.setDob(rs.getString("Dob"));
                 staff.setEdu(rs.getString("Edu_qual"));                
                 staff.setSkill(rs.getString("Tech_skills"));
+                staff.setAccountId(rs.getString("id"));
                 
                 return staff;
             }
@@ -143,4 +146,6 @@ public class StaffDao {
         }
         return null;
     }
+    
+    
 }

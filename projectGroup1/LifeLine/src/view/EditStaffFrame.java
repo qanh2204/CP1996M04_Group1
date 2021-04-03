@@ -5,7 +5,17 @@
  */
 package view;
 
+import java.awt.TextField;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javafx.scene.control.Alert;
+import javax.swing.JOptionPane;
 import model.Staff;
+import model.User;
 import service.StaffService;
 
 /**
@@ -16,12 +26,13 @@ public class EditStaffFrame extends javax.swing.JFrame {
 
     StaffService staffService;
     private Staff staff;
-    
-    public EditStaffFrame(int staffId) {
+
+    public EditStaffFrame(int staffId) throws ParseException {
         staffService = new StaffService();
         staff = staffService.getStaffById(staffId);
+
         initComponents();
-        
+
         txtId.setText(String.valueOf(staff.getId()));
         txtDoj.setText(staff.getDoj());
         txtDep.setText(staff.getDept());
@@ -29,19 +40,100 @@ public class EditStaffFrame extends javax.swing.JFrame {
         txtFullName.setText(staff.getFname());
         txtAddr.setText(staff.getAddr());
         txtPno.setText(staff.getPhone());
-        txtDob.setText(staff.getDob());
+        java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(staff.getDob());
+        dobDate.setDate(date);
         txtEdu.setText(staff.getEdu());
         txtSkill.setText(staff.getSkill());
-        
+        txtAccId.setText(staff.getAccountId());
+
         String sex = "male";
-        if(sex != null){
-            if(sex.equals("male")){
+        if (sex != null) {
+            if (sex.equals("male")) {
                 maleRadioButton.setSelected(true);
             }
-            if(sex.equals("female")){
+            if (sex.equals("female")) {
                 femaleRadioButton.setSelected(true);
             }
-            
+        }
+    }
+
+    private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+        String phonePattern = "^[0-9]{10,12}$";
+
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //Department
+            str = txtDep.getText();
+            if (str.isEmpty()) {
+                txtDep.grabFocus();
+                throw new Exception("Department cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtDep.grabFocus();
+                throw new Exception("Department contain more blank");
+            }
+            //last name
+            str = txtLastName.getText();
+            if (str.isEmpty()) {
+                txtLastName.grabFocus();
+                throw new Exception("Last Name cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtLastName.grabFocus();
+                throw new Exception("Last Name contain more blank");
+            }
+            //first name
+            str = txtFullName.getText();
+            if (str.isEmpty()) {
+                txtFullName.grabFocus();
+                throw new Exception("First Name cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtFullName.grabFocus();
+                throw new Exception("First Name contain be blank");
+            }
+            //addr
+            str = txtAddr.getText();
+            if (str.isEmpty()) {
+                txtAddr.grabFocus();
+                throw new Exception("Address cannot be blank");
+            }
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtAddr.grabFocus();
+                throw new Exception(" Address contain more blank");
+            }
+
+            //phone
+            str = txtPno.getText();
+            if (str.isEmpty()) {
+                txtPno.grabFocus();
+                throw new Exception("Phone cannot be blank");
+            }
+            str = txtPno.getText();
+            ptn = Pattern.compile(phonePattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtPno.grabFocus();
+                throw new Exception("Phone must be 10-12 digits");
+            }
+
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Phone must be a number");
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
         }
     }
 
@@ -55,6 +147,7 @@ public class EditStaffFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtDoj = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -77,11 +170,24 @@ public class EditStaffFrame extends javax.swing.JFrame {
         txtFullName = new javax.swing.JTextField();
         txtAddr = new javax.swing.JTextField();
         txtPno = new javax.swing.JTextField();
-        txtDob = new javax.swing.JTextField();
         txtEdu = new javax.swing.JTextField();
         txtSkill = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtAccId = new javax.swing.JTextField();
+        dobDate = new com.toedter.calendar.JDateChooser();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -113,6 +219,11 @@ public class EditStaffFrame extends javax.swing.JFrame {
         txtId.setEditable(false);
         txtId.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtId.setEnabled(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("ID");
 
@@ -162,6 +273,10 @@ public class EditStaffFrame extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        jLabel5.setText("Account Id");
+
+        txtAccId.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,12 +284,6 @@ public class EditStaffFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
@@ -185,29 +294,37 @@ public class EditStaffFrame extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
                             .addComponent(jLabel11)
                             .addComponent(jLabel12)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtEdu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDoj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAccId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dobDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
                                 .addGap(69, 69, 69)
                                 .addComponent(maleRadioButton)
                                 .addGap(59, 59, 59)
                                 .addComponent(femaleRadioButton))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtEdu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDob, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDoj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(78, 78, 78)))))
                 .addGap(118, 118, 118))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -244,9 +361,9 @@ public class EditStaffFrame extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txtPno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(txtDob, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dobDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
@@ -257,10 +374,14 @@ public class EditStaffFrame extends javax.swing.JFrame {
                     .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtAccId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maleRadioButton)
                     .addComponent(femaleRadioButton)
                     .addComponent(jLabel10))
-                .addGap(54, 54, 54)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -277,41 +398,49 @@ public class EditStaffFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
-        staff.setId(Integer.parseInt(txtId.getText()));
-        staff.setDoj(txtDoj.getText());
-        staff.setDept(txtDep.getText());
-        staff.setLname(txtLastName.getText());
-        staff.setFname(txtFullName.getText());
-        staff.setAddr(txtAddr.getText());
-        staff.setPhone(txtPno.getText());
-        staff.setDob(txtDob.getText());
-        staff.setEdu(txtEdu.getText());
-        staff.setSkill(txtSkill.getText());
-        
-        String sex = "male";
-        if(maleRadioButton.isSelected()){
-            sex = "male";
-        }
-        if(femaleRadioButton.isSelected()){
-            sex = "female";
-        }
-        staff.setSex(sex);        
-        staffService.updateStaff(staff);
+        if (validateform() == true) {
+            staff.setId(Integer.parseInt(txtId.getText()));
+            staff.setDoj(txtDoj.getText());
+            staff.setDept(txtDep.getText());
+            staff.setLname(txtLastName.getText());
+            staff.setFname(txtFullName.getText());
+            staff.setAddr(txtAddr.getText());
+            staff.setPhone(txtPno.getText());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            String date = dateFormat.format(dobDate.getDate());
+            staff.setDob(String.format(date));
+            staff.setEdu(txtEdu.getText());
+            staff.setSkill(txtSkill.getText());
+            staff.setAccountId(txtAccId.getText());
 
-        new ListStaffJPanel().setVisible(true);
-        this.dispose();
-        
+            String sex = "male";
+            if (maleRadioButton.isSelected()) {
+                sex = "male";
+            }
+            if (femaleRadioButton.isSelected()) {
+                sex = "female";
+            }
+            staff.setSex(sex);
+            staffService.updateStaff(staff);
+            JOptionPane.showMessageDialog(this, "Edit Success");
+            new ListStaffJPanel().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_sbBtnActionPerformed
 
     private void txtDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDepActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDepActionPerformed
 
-   
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JDateChooser dobDate;
     private javax.swing.JRadioButton femaleRadioButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -321,16 +450,18 @@ public class EditStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton maleRadioButton;
     private javax.swing.JButton sbBtn;
+    private javax.swing.JTextField txtAccId;
     private javax.swing.JTextField txtAddr;
     private javax.swing.JTextField txtDep;
-    private javax.swing.JTextField txtDob;
     private javax.swing.JTextField txtDoj;
     private javax.swing.JTextField txtEdu;
     private javax.swing.JTextField txtFullName;
@@ -339,4 +470,5 @@ public class EditStaffFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtPno;
     private javax.swing.JTextField txtSkill;
     // End of variables declaration//GEN-END:variables
+
 }

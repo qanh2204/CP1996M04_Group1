@@ -11,11 +11,12 @@ package model;
  */
 public class Staff {
 
-    private int id ;
-    private String fname, lname, addr, edu, skill, dept, sex, doj, dob, phone;
+    private int id;
+    private String fname, lname, addr, edu, skill, dept, sex, doj, dob, phone, accountId ;
 
-    public Staff(int id, String fname,String phone, String lname, String addr, String edu, String skill, String dept, String sex, String doj, String dob) {
+    public Staff(int id,String accountId, String fname,String phone, String lname, String addr, String edu, String skill, String dept, String sex, String doj, String dob) {
         this.id = id;
+        this.accountId = accountId;
         this.phone = phone;
         this.fname = fname;
         this.lname = lname;
@@ -31,6 +32,15 @@ public class Staff {
     public Staff() {
     }
 
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    
     public int getId() {
         return id;
     }

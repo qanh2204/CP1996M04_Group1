@@ -23,15 +23,17 @@ public class MainStaffFrame extends javax.swing.JFrame {
     public MainStaffFrame() {
         initComponents();
         
-        setTitle("Life Line");
+        setTitle("Staff Form");
         setLocationRelativeTo(null);
         
         Control_Staff control = new Control_Staff(View);
+        control.setView(jpnPatient, jlbPatient);
         
         List<DanhMucBean> listItem = new ArrayList<>();
         listItem.add(new DanhMucBean("Patient", jpnPatient, jlbPatient));
         listItem.add(new DanhMucBean("Stock", jpnStock, jlbStock));
         listItem.add(new DanhMucBean("Bill", jpnBill, jlbBill));
+        listItem.add(new DanhMucBean("ChangePassword", jpnChange, jlbChange));
         
         control.setEvent(listItem);
     }
@@ -54,6 +56,8 @@ public class MainStaffFrame extends javax.swing.JFrame {
         jpnBill = new javax.swing.JPanel();
         jlbBill = new javax.swing.JLabel();
         btnLogout3 = new javax.swing.JButton();
+        jpnChange = new javax.swing.JPanel();
+        jlbChange = new javax.swing.JLabel();
         View = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -142,31 +146,61 @@ public class MainStaffFrame extends javax.swing.JFrame {
             }
         });
 
+        jpnChange.setBackground(new java.awt.Color(27, 52, 9));
+
+        jlbChange.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jlbChange.setForeground(new java.awt.Color(255, 255, 255));
+        jlbChange.setText("Change Password");
+
+        javax.swing.GroupLayout jpnChangeLayout = new javax.swing.GroupLayout(jpnChange);
+        jpnChange.setLayout(jpnChangeLayout);
+        jpnChangeLayout.setHorizontalGroup(
+            jpnChangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnChangeLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlbChange, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
+        );
+        jpnChangeLayout.setVerticalGroup(
+            jpnChangeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpnChangeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jlbChange, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout MenuLayout = new javax.swing.GroupLayout(Menu);
         Menu.setLayout(MenuLayout);
         MenuLayout.setHorizontalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
+            .addGroup(MenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(jpnPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpnStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE))
-                .addGap(31, 31, 31))
+                .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MenuLayout.createSequentialGroup()
+                        .addGroup(MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE)
+                            .addComponent(jpnPatient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpnStock, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 201, Short.MAX_VALUE))
+                        .addGap(31, 31, 31))
+                    .addGroup(MenuLayout.createSequentialGroup()
+                        .addComponent(jpnChange, javax.swing.GroupLayout.PREFERRED_SIZE, 217, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         MenuLayout.setVerticalGroup(
             MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addContainerGap()
                 .addComponent(jpnPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61)
+                .addGap(48, 48, 48)
                 .addComponent(jpnStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(71, 71, 71)
                 .addComponent(jpnBill, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGap(47, 47, 47)
+                .addComponent(jpnChange, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addComponent(btnLogout3, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addGap(139, 139, 139))
+                .addGap(47, 47, 47))
         );
 
         View.setBackground(new java.awt.Color(153, 255, 255));
@@ -267,9 +301,11 @@ public class MainStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel jlbBill;
+    private javax.swing.JLabel jlbChange;
     private javax.swing.JLabel jlbPatient;
     private javax.swing.JLabel jlbStock;
     private javax.swing.JPanel jpnBill;
+    private javax.swing.JPanel jpnChange;
     private javax.swing.JPanel jpnPatient;
     private javax.swing.JPanel jpnRoot;
     private javax.swing.JPanel jpnStock;

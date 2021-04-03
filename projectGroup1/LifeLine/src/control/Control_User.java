@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import view.ChangePassword;
 import view.ListDoctorJPanel;
 import view.ListStaffJPanel;
 
@@ -76,9 +77,8 @@ public class Control_User {
                 case "Doctor":
                     node =  new ListDoctorJPanel();
                     break;
-                case "Bill":
-                    node =  new Bill_Form();
-                    break;    
+                case "ChangePassword":
+                    node = new ChangePassword();
                 default:
                     break;
             }

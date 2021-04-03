@@ -4,6 +4,21 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -33,13 +48,6 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
-                      <Component id="sbBtn" min="-2" pref="138" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="backBtn" min="-2" pref="143" max="-2" attributes="0"/>
-                      <EmptySpace min="78" pref="78" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
@@ -51,32 +59,41 @@
                           <Component id="jLabel7" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="txtEdu" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtPno" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtFullName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtLastName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtSkill" min="-2" pref="650" max="-2" attributes="0"/>
+                          <Component id="txtAccId" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
+                          <Component id="dobDate" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                               <Component id="maleRadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Component id="femaleRadioButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtEdu" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtDob" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtPno" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtFullName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtLastName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtSkill" min="-2" pref="650" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="sbBtn" min="-2" pref="138" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="backBtn" min="-2" pref="143" max="-2" attributes="0"/>
+                              <EmptySpace min="78" pref="78" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -126,11 +143,11 @@
                   <Component id="txtPno" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDob" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                  <Component id="dobDate" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEdu" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -140,13 +157,18 @@
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtSkill" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtAccId" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="maleRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="femaleRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="backBtn" alignment="3" min="-2" pref="84" max="-2" attributes="0"/>
                   <Component id="sbBtn" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
@@ -209,6 +231,9 @@
         </Property>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -268,8 +293,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtPno">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtDob">
-    </Component>
     <Component class="javax.swing.JTextField" name="txtEdu">
     </Component>
     <Component class="javax.swing.JTextField" name="txtSkill">
@@ -316,5 +339,17 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Account Id"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAccId">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dobDate">
+    </Component>
   </SubComponents>
 </Form>

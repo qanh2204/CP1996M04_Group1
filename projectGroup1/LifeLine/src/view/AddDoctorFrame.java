@@ -5,8 +5,17 @@
  */
 package view;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import model.Doctor;
 import service.DoctorService;
+import service.UserService;
 
 /**
  *
@@ -16,11 +25,104 @@ public class AddDoctorFrame extends javax.swing.JFrame {
 
     DoctorService doctorService;
     Doctor doctor;
+
     public AddDoctorFrame() {
         initComponents();
         doctorService = new DoctorService();
         doctor = new Doctor();
+        UserService userService = new UserService();
+        showCbData(userService.getIdUserForDoctor());
+        //autoDoctorID();
     }
+
+    private void showCbData(List<String> doctors) {
+        for (String d : doctors) {
+            accIdCb.addItem(d);
+        }
+    }
+
+//    private void autoDoctorID() {
+//        int autoID;
+//        try {
+//            String sql;
+//            Connection cn;
+//            cn = dao.JDBCConection.getConnection();
+//            PreparedStatement pstm;
+//            ResultSet rs;
+//            sql = "Select max(doctor_id) from Doctor";
+//            pstm = cn.prepareStatement(sql);
+//            rs = pstm.executeQuery();
+//
+//            if (rs.next()) {
+//                autoID = rs.getInt(1);
+//                autoID++;
+//                txtId.setText(Integer.toString(autoID));
+//            } else {
+//                txtId.setText("1");
+//            }
+//
+//        } catch (SQLException ex) {
+//            ex.printStackTrace();
+//        }
+//
+//    }
+
+//    private boolean validateform() {
+//        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+//        String phonePattern = "^[0-9]{10,12}$";
+//
+//        String str;
+//        Pattern ptn;
+//        Matcher mc;
+//        try {
+//            //Doctor Name
+//            str = txtDName.getText();
+//            if (str.isEmpty()) {
+//                txtDName.grabFocus();
+//                throw new Exception("Doctor Name cannot be blank");
+//            }
+//            ptn = Pattern.compile(textPattern);
+//            mc = ptn.matcher(str);
+//            if (!mc.matches()) {
+//                txtDName.grabFocus();
+//                throw new Exception("Doctor Name contain more blank");
+//            }
+//
+//            //addr
+//            str = txtAddr.getText();
+//            if (str.isEmpty()) {
+//                txtAddr.grabFocus();
+//                throw new Exception("Address cannot be blank");
+//            }
+//            mc = ptn.matcher(str);
+//            if (!mc.matches()) {
+//                txtAddr.grabFocus();
+//                throw new Exception(" Address contain more blank");
+//            }
+//
+//            //phone
+//            str = txtPno.getText();
+//            if (str.isEmpty()) {
+//                txtPno.grabFocus();
+//                throw new Exception("Phone cannot be blank");
+//            }
+//            str = txtPno.getText();
+//            ptn = Pattern.compile(phonePattern);
+//            mc = ptn.matcher(str);
+//            if (!mc.matches()) {
+//                txtPno.grabFocus();
+//                throw new Exception("Phone must be 10-12 digits");
+//            }
+//
+//            return true;
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(this, "Phone must be a number");
+//            return false;
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, e.getMessage());
+//            return false;
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,9 +135,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
 
         backBtn = new javax.swing.JButton();
         sbBtn = new javax.swing.JButton();
-        txtId = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -43,8 +144,11 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         txtAddr = new javax.swing.JTextField();
         txtPno = new javax.swing.JTextField();
         txtSpe = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        accIdCb = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -63,22 +167,12 @@ public class AddDoctorFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("ID");
-
-        jLabel6.setText("Doctor Name");
-
-        jLabel8.setText("Address");
-
-        jLabel9.setText("Phone");
-
-        jLabel13.setText("Specialization");
-
         jPanel3.setBackground(new java.awt.Color(102, 176, 50));
 
         jLabel1.setBackground(new java.awt.Color(102, 176, 50));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ADD STAFF");
+        jLabel1.setText("ADD DOCTOR");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -87,7 +181,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 792, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,65 +191,98 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                 .addGap(9, 9, 9))
         );
 
+        jLabel8.setText("Address");
+
+        jLabel9.setText("Phone");
+
+        jLabel13.setText("Specialization");
+
+        jLabel3.setText("ID");
+
+        jLabel6.setText("Doctor Name");
+
+        accIdCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accIdCbActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Account ID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(49, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtDName, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPno, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSpe, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(30, 30, 30))
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(accIdCb, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSpe, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(334, 334, 334)
+                .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(108, 108, 108))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(103, 103, 103)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtDName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                    .addComponent(txtDName, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtAddr, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtPno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(100, 100, 100)
+                    .addComponent(txtPno, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(txtSpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(101, 101, 101)
+                    .addComponent(txtSpe, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(accIdCb, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(115, 115, 115)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,26 +295,37 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
-        doctor.setId(Integer.parseInt(txtId.getText()));
-        doctor.setDname(txtDName.getText());
-        doctor.setAddr(txtAddr.getText());
-        doctor.setPhone(txtPno.getText());
-        doctor.setSpe(txtSpe.getText());
-        
-        doctorService.addDoctor(doctor);
-        
-        new ListDoctorJPanel().setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_sbBtnActionPerformed
+      //  if (validateform() == true) {
 
-   
+            doctor.setId(Integer.parseInt(txtId.getText()));
+            doctor.setDname(txtDName.getText());
+            doctor.setAddr(txtAddr.getText());
+            doctor.setPhone(txtPno.getText());
+            doctor.setSpe(txtSpe.getText());
+            doctor.setAccountId(txtSpe.getText());
+            
+            String selectedItem = (String) accIdCb.getSelectedItem();
+            doctor.setAccountId(selectedItem);
+
+            doctorService.addDoctor(doctor);
+            JOptionPane.showMessageDialog(this, "Add Success");
+            new ListDoctorJPanel().setVisible(true);
+            this.dispose();
+      //  }
+    }//GEN-LAST:event_sbBtnActionPerformed
+     
+    private void accIdCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accIdCbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accIdCbActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> accIdCb;
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

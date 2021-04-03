@@ -31,7 +31,7 @@ public class UserDao {
             ResultSet rs = pStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("id"));
+                user.setId(rs.getString("id"));
                 user.setUser(rs.getString("username"));
                 user.setPass(rs.getString("pass"));
                 user.setType(rs.getString("type"));
@@ -53,7 +53,7 @@ public class UserDao {
             pStatement.setString(1, user.getUser());
             pStatement.setString(2, user.getPass());
             pStatement.setString(3, user.getType());
-            pStatement.setInt(4, user.getId());
+            pStatement.setString(4, user.getId());
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
 
@@ -62,13 +62,13 @@ public class UserDao {
         }
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(String id) {
         Connection conn = JDBCConection.getConnection();
         String sql = "delete from Account where id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
-            pStatement.setInt(1, id);
+            pStatement.setString(1, id);
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
         } catch (SQLException e) {
@@ -82,7 +82,7 @@ public class UserDao {
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
-            pStatement.setInt(1, user.getId());
+            pStatement.setString(1, user.getId());
             pStatement.setString(2, user.getUser());
             pStatement.setString(3, user.getPass());
             pStatement.setString(4, user.getType());
@@ -95,17 +95,17 @@ public class UserDao {
         }
     }
 
-    public User getUsersById(int id) {
+    public User getUsersById(String id) {
 
         Connection conn = JDBCConection.getConnection();
         String sql = "select * from Account where id = ?";
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
-            pStatement.setInt(1, id);
+            pStatement.setString(1, id);
             ResultSet rs = pStatement.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setId(rs.getInt("id"));
+                user.setId(rs.getString("id"));
                 user.setUser(rs.getString("username"));
                 user.setPass(rs.getString("pass"));
                 user.setType(rs.getString("type"));
@@ -118,7 +118,38 @@ public class UserDao {
         return null;
     }
 
+    public List<String> getIdUsersForStaff() {
+        List<String> users = new ArrayList<String>();
+        Connection conn = JDBCConection.getConnection();
+        String sql = "select id from Account where type = 'sta'";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                users.add(rs.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
     
+    public List<String> getIdUsersForDoctor() {
+        List<String> users = new ArrayList<String>();
+        Connection conn = JDBCConection.getConnection();
+        String sql = "select id from Account where type = 'doc'";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+                users.add(rs.getString("id"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public String getType(String user, String pass) {
         String type = "";
 
@@ -161,8 +192,21 @@ public class UserDao {
         return type;
     }
     
-//    public static void main(String[] args) {
-//        UserService a= new UserService();
-//        System.out.println(a.getType("anh", "124"));
-//    }
+    public void setPass(String user, String oldpass ,String newpass) {
+        Connection conn = JDBCConection.getConnection();
+        String sql = "update Account set pass = ? where username=? and pass=?";
+
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+
+            pStatement.setString(1, newpass);
+            pStatement.setString(2, user);
+            pStatement.setString(3, oldpass);
+            int rs = pStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

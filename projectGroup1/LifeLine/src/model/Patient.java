@@ -11,16 +11,15 @@ package model;
  */
 public class Patient {
 
-    private int id, bill ;
-    private String fname, lname, addr, test, dept, sex, doj, dob, phone;
+    private int id ;
+    private String fname, lname, addr, dept, sex, doj, dob, phone;
 
-    public Patient(int id, int bill, String fname, String lname, String addr, String test, String dept, String sex, String doj, String dob, String phone) {
+    public Patient(int id , String fname, String lname, String addr, String dept, String sex, String doj, String dob, String phone) {
         this.id = id;
-        this.bill = bill;
+        
         this.fname = fname;
         this.lname = lname;
         this.addr = addr;
-        this.test = test;
         this.dept = dept;
         this.sex = sex;
         this.doj = doj;
@@ -39,14 +38,9 @@ public class Patient {
         this.id = id;
     }
 
-    public int getBill() {
-        return bill;
-    }
+    
 
-    public void setBill(int bill) {
-        this.bill = bill;
-    }
-
+    
     public String getFname() {
         return fname;
     }
@@ -71,14 +65,7 @@ public class Patient {
         this.addr = addr;
     }
 
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
-    }
-
+    
     public String getDept() {
         return dept;
     }

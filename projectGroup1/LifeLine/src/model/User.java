@@ -11,12 +11,12 @@ package model;
  */
 public class User {
 
-    private int id;
+    private String id;
     private String user;
     private String pass;
     private String type;
 
-    public User(int id, String user, String pass, String type) {
+    public User(String id, String user, String pass, String type) {
         this.id = id;
         this.user = user;
         this.pass = pass;
@@ -27,11 +27,11 @@ public class User {
     }
 
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

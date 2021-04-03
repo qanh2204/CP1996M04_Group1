@@ -5,6 +5,12 @@
  */
 package view;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import model.User;
 import service.UserService;
 
@@ -16,10 +22,142 @@ public class AddUserFrame extends javax.swing.JFrame {
 
     UserService userService;
     User user;
+
     public AddUserFrame() {
         initComponents();
         userService = new UserService();
         user = new User();
+//        String type = "adm";
+//        if (adRadioButton.isSelected()) {
+//            type = "adm";
+//            autoIDAd();
+//
+//        }
+//        if (docRadioButton.isSelected()) {
+//            type = "doc";
+//            autoIDDo();
+//
+//        }
+//        if (staRadioButton.isSelected()) {
+//            type = "sta";
+//            autoIDSt();
+//
+//        }
+    }
+
+    private void autoIDAd() {
+        try {
+            String sql;
+            Connection cn;
+            cn = dao.JDBCConection.getConnection();
+            PreparedStatement pstm;
+            ResultSet rs;
+            sql = "Select top 1 id from Account order by id desc";
+            pstm = cn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            rs.next();
+            String test = rs.getString("id");
+            String subtest = test.substring(3, 6);
+            Integer subnum = Integer.parseInt(subtest) + 1;
+            
+            if (subnum > 0 && subnum < 10) {
+                txtId.setText("adm00" + subnum);
+            } else if (subnum < 100) {
+                txtId.setText("adm0" + subnum);
+            } else {
+                txtId.setText("adm" + subnum);
+            }
+
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    private void autoIDDo() {
+        try {
+            String sql;
+            Connection cn;
+            cn = dao.JDBCConection.getConnection();
+            PreparedStatement pstm;
+            ResultSet rs;
+            sql = "Select top 1 id from Account order by id desc";
+            pstm = cn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            rs.next();
+            String test = rs.getString("id");
+            String subtest = test.substring(3, 6);
+            Integer subnum = Integer.parseInt(subtest) + 1;
+            
+            if (subnum > 0 && subnum < 10) {
+                txtId.setText("doc00" + subnum);
+            } else if (subnum < 100) {
+                txtId.setText("doc0" + subnum);
+            } else {
+                txtId.setText("doc" + subnum);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    private void autoIDSt() {
+        try {
+            String sql;
+            Connection cn;
+            cn = dao.JDBCConection.getConnection();
+            PreparedStatement pstm;
+            ResultSet rs;
+            sql = "Select top 1 id from Account order by id desc";
+            pstm = cn.prepareStatement(sql);
+            rs = pstm.executeQuery();
+            rs.next();
+            String test = rs.getString("id");
+            String subtest = test.substring(3, 6);
+            Integer subnum = Integer.parseInt(subtest) + 1;
+        
+            if (subnum > 0 && subnum < 10) {
+                txtId.setText("sta00" + subnum);
+            } else if (subnum < 100) {
+                txtId.setText("sta0" + subnum);
+            } else {
+                txtId.setText("sta" + subnum);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //login name
+            str = txtUser.getText();
+            if (str.isEmpty()) {
+                txtUser.grabFocus();
+                throw new Exception("Login cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtUser.grabFocus();
+                throw new Exception("Login Name contain more blank");
+            }
+            //pass
+            str = txtPass.getText();
+            if (str.length() < 4 || str.length() > 12) {
+                txtPass.grabFocus();
+                throw new Exception("Password must be greater than 4 and lesser than 12.");
+            }
+            return true;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -51,6 +189,12 @@ public class AddUserFrame extends javax.swing.JFrame {
 
         jLabel2.setText("User Name ");
 
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Password");
 
         jLabel5.setText("Type");
@@ -78,6 +222,8 @@ public class AddUserFrame extends javax.swing.JFrame {
                 sbBtnActionPerformed(evt);
             }
         });
+
+        txtId.setEditable(false);
 
         jLabel3.setText("ID");
 
@@ -177,28 +323,39 @@ public class AddUserFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
-        user.setId(Integer.parseInt(txtId.getText()));
-        user.setUser(txtUser.getText());
-        user.setPass(String.valueOf(txtPass.getPassword()));
-        String type = "adm";
-        if(adRadioButton.isSelected()){
-            type = "adm";
-        }
-        if(docRadioButton.isSelected()){
-            type = "doc";
-        }
-        if(staRadioButton.isSelected()){
-            type = "sta";
-        }
-        user.setType(type);
-        userService.addUser(user);
-        
-        new ListUserJPanel().setVisible(true);
-        this.dispose();
-        
-    }//GEN-LAST:event_sbBtnActionPerformed
+        if (validateform() == true) {
+            user.setUser(txtUser.getText());
+            user.setPass(String.valueOf(txtPass.getPassword()));
+            String type = "adm";
+            if (adRadioButton.isSelected()) {
+                type = "adm";
+                autoIDAd();
 
-   
+            }
+            if (docRadioButton.isSelected()) {
+                type = "doc";
+                autoIDDo();
+
+            }
+            if (staRadioButton.isSelected()) {
+                type = "sta";
+                autoIDSt();
+
+            }
+            user.setType(type);
+
+            user.setId(txtId.getText());
+            userService.addUser(user);
+            JOptionPane.showMessageDialog(this, "Add Success");
+            new ListUserJPanel().setVisible(true);
+            this.dispose();
+
+    }//GEN-LAST:event_sbBtnActionPerformed
+    }
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton adRadioButton;

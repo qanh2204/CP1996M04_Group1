@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import model.User;
 import service.UserService;
 
@@ -18,13 +21,13 @@ public class EditUserFrame extends javax.swing.JFrame {
     /**
      * Creates new form EditUserFrame
      */
-    public EditUserFrame(int userId) {
+    public EditUserFrame(String userId) {
         
         userService = new UserService();
         user = userService.getUserById(userId);
         initComponents();
         
-        txtId.setText(String.valueOf(user.getId()));
+        txtId.setText(user.getId());
         txtUser.setText(user.getUser());
         txtPass.setText(user.getPass());
         
@@ -41,7 +44,38 @@ public class EditUserFrame extends javax.swing.JFrame {
             }
         }         
     }
+ private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
 
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //login name
+            str = txtUser.getText();
+            if (str.isEmpty()) {
+                txtUser.grabFocus();
+                throw new Exception("Login cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtUser.grabFocus();
+                throw new Exception("Login Name contain more blank");
+            }
+            //pass
+            str = txtPass.getText();
+            if (str.length() < 4 || str.length() > 12) {
+                txtPass.grabFocus();
+                throw new Exception("Password must be greater than 4 and lesser than 12.");
+            }
+            return true;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,8 +214,9 @@ public class EditUserFrame extends javax.swing.JFrame {
         this.dispose();
     }                                       
 
-    private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {                                      
-        user.setId(Integer.parseInt(txtId.getText()));
+    private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {  
+        if(validateform()==true){
+        user.setId(txtId.getText());
         user.setUser(txtUser.getText());
         user.setPass(String.valueOf(txtPass.getPassword()));
         String type = "adm";
@@ -196,12 +231,16 @@ public class EditUserFrame extends javax.swing.JFrame {
         }
         user.setType(type);
         userService.updateUser(user);
-
+        JOptionPane.showMessageDialog(this, "Edit Success");
+        new view.ListUserJPanel().refresh();
+        
         new view.ListUserJPanel().setVisible(true);
+        
+        
         this.dispose();
 
     }                                     
-
+    }
     
 
     // Variables declaration - do not modify                     

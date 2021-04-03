@@ -46,8 +46,6 @@
                           <Component id="jLabel9" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel13" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -59,7 +57,6 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="txtTest" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDob" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtPno" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
@@ -68,7 +65,6 @@
                                   <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                                   <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                                  <Component id="txtBill" min="-2" pref="650" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -130,17 +126,7 @@
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtDob" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTest" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtBill" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="maleRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="femaleRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -151,7 +137,7 @@
                   <Component id="backBtn" alignment="3" min="-2" pref="84" max="-2" attributes="0"/>
                   <Component id="sbBtn" alignment="3" min="-2" pref="82" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="28" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -251,16 +237,6 @@
         <Property name="text" type="java.lang.String" value="Date of birth"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Test"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Bill"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtDep">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDepActionPerformed"/>
@@ -275,10 +251,6 @@
     <Component class="javax.swing.JTextField" name="txtPno">
     </Component>
     <Component class="javax.swing.JTextField" name="txtDob">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtTest">
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtBill">
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>

@@ -38,8 +38,6 @@ public class PatDao {
                 patient.setPhone(rs.getString("P_no"));
                 patient.setSex(rs.getString("gender"));
                 patient.setDob(rs.getString("Dob"));
-                patient.setTest(rs.getString("test"));
-                patient.setBill(rs.getInt("bill"));
                 
                 patients.add(patient);
             }
@@ -52,7 +50,7 @@ public class PatDao {
     public void updatePatient(Patient patient) {
         //Connection conn = JDBCConection.getConnection();
         Connection conn = dao.JDBCConection.getConnection();
-        String sql = "update Patient set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ?, test = ?, bill = ? where patient_id = ?";
+        String sql = "update Patient set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ?, = ? where patient_id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -65,9 +63,7 @@ public class PatDao {
             pStatement.setString(6, patient.getPhone());
             pStatement.setString(7, patient.getSex());
             pStatement.setString(8, patient.getDob());
-            pStatement.setString(9, patient.getTest());
-            pStatement.setInt(10, patient.getBill());
-            pStatement.setInt(11, patient.getId());
+            pStatement.setInt(10, patient.getId());
             
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
@@ -91,7 +87,7 @@ public class PatDao {
     
     public void addPatient(Patient patient) {
         Connection conn = JDBCConection.getConnection();
-        String sql = "insert into Patient(patient_id ,F_name ,L_name,Doj ,Dept ,addr ,P_no ,gender ,Dob ,test ,bill) values(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into Patient(patient_id ,F_name ,L_name,Doj ,Dept ,addr ,P_no ,gender ,Dob ) values(?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -104,8 +100,6 @@ public class PatDao {
             pStatement.setString(7, patient.getPhone());
             pStatement.setString(8, patient.getSex());
             pStatement.setString(9, patient.getDob());
-            pStatement.setString(10, patient.getTest());
-            pStatement.setInt(11, patient.getBill());
 
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
@@ -134,8 +128,6 @@ public class PatDao {
                 patient.setPhone(rs.getString("P_no"));
                 patient.setSex(rs.getString("gender"));
                 patient.setDob(rs.getString("Dob"));
-                patient.setTest(rs.getString("test"));                
-                patient.setBill(rs.getInt("bill"));
                 
                 return patient;
             }

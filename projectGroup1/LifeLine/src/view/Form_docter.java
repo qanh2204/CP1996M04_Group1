@@ -28,12 +28,12 @@ public class Form_docter extends javax.swing.JFrame {
         setLocationRelativeTo(null);
 
         Control_Docter control = new Control_Docter(View);
-        control.setView(jpnInfo, jlbInfo);
+        control.setView(jpnReport, jlbReport);
 
         List<DanhMucBean> listItem = new ArrayList<>();
         listItem.add(new DanhMucBean("Report", jpnReport, jlbReport));
         listItem.add(new DanhMucBean("Test", jpnTest, jlbTest));
-        listItem.add(new DanhMucBean("Logout", jpnInfo, jlbInfo));
+        listItem.add(new DanhMucBean("ChangePassword", jpnInfo, jlbInfo));
 
         control.setEvent(listItem);
     }

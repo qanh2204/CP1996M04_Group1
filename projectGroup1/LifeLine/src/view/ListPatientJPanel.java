@@ -46,8 +46,6 @@ public class ListPatientJPanel extends javax.swing.JPanel {
         dTableModel.addColumn("Phone");
         dTableModel.addColumn("Sex");
         dTableModel.addColumn("Date of birth");
-        dTableModel.addColumn("Test");
-        dTableModel.addColumn("Bill");
         patientTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
 
         setTableData(patientService.getAllPatients());
@@ -55,7 +53,8 @@ public class ListPatientJPanel extends javax.swing.JPanel {
 
     private void setTableData(List<Patient> patients) {
         for (Patient patient:patients) {
-            dTableModel.addRow(new Object[]{patient.getId(), patient.getDoj(), patient.getDept(), patient.getLname(), patient.getFname(), patient.getAddr(), patient.getPhone(), patient.getSex(), patient.getDob(), patient.getTest(), patient.getBill()});
+            dTableModel.addRow(new Object[]{patient.getId(), patient.getDoj(), patient.getDept(), patient.getLname(), 
+                patient.getFname(), patient.getAddr(), patient.getPhone(), patient.getSex(), patient.getDob()});
         }
     }
 

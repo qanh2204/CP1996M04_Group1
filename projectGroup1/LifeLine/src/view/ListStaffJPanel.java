@@ -11,6 +11,9 @@ import model.Staff;
 import service.StaffService;
 import javax.swing.JOptionPane;
 import java.awt.Font;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -48,6 +51,7 @@ public class ListStaffJPanel extends javax.swing.JPanel {
         dTableModel.addColumn("Date of birth");
         dTableModel.addColumn("Education");
         dTableModel.addColumn("Technical Skill");
+        dTableModel.addColumn("Accoun Id");
         staffTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
 
         setTableData(staffService.getAllStaffs());
@@ -55,7 +59,8 @@ public class ListStaffJPanel extends javax.swing.JPanel {
 
     private void setTableData(List<Staff> staffs) {
         for (Staff staff:staffs) {
-            dTableModel.addRow(new Object[]{staff.getId(), staff.getDoj(), staff.getDept(), staff.getLname(), staff.getFname(), staff.getAddr(), staff.getPhone(), staff.getSex(), staff.getDob(), staff.getEdu(), staff.getSkill()});
+            dTableModel.addRow(new Object[]{staff.getId(), staff.getDoj(), staff.getDept(), staff.getLname(), staff.getFname(), 
+                staff.getAddr(), staff.getPhone(), staff.getSex(), staff.getDob(), staff.getEdu(), staff.getSkill(), staff.getAccountId()});
         }
     }
 
@@ -184,7 +189,11 @@ public class ListStaffJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(ListStaffJPanel.this, "Please select staff first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             int staffId = Integer.valueOf(String.valueOf(staffTable.getValueAt(row, 0)));
-            new EditStaffFrame(staffId).setVisible(true);
+            try {
+                new EditStaffFrame(staffId).setVisible(true);
+            } catch (ParseException ex) {
+                Logger.getLogger(ListStaffJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.disable();
         }
     }//GEN-LAST:event_editBtnActionPerformed

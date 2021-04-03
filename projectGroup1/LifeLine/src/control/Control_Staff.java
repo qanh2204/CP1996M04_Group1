@@ -16,6 +16,7 @@ import java.awt.event.MouseListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import view.ChangePassword;
 
 public class Control_Staff {
 
@@ -76,7 +77,9 @@ public class Control_Staff {
                     break;
                 case "Bill":
                     node =  new Bill_Form();
-                    break;    
+                    break; 
+                case "ChangePassword":
+                    node = new ChangePassword();    
                 default:
                     break;
             }
