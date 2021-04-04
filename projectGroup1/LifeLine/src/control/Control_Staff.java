@@ -68,10 +68,7 @@ public class Control_Staff {
             switch (kind) {
                 case "Patient":
                     node =  new ListPatientJPanel();
-                    break;
-                case "Staff":
-                    node =  new ListStaffJPanel();
-                    break;
+                    break;                
                 case "Stock":
                     node =  new ListStockJPanel();
                     break;

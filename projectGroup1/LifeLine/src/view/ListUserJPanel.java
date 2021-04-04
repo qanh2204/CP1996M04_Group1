@@ -42,13 +42,14 @@ public class ListUserJPanel extends javax.swing.JPanel {
         dTableModel.addColumn("Password");
         dTableModel.addColumn("Type");
         userTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 18));
-        
+        dTableModel.setRowCount(0);
         setTableData(userService.getAllUsers());
+        
     }
 
     private void setTableData(List<User> users) {
         for (User user : users) {
-            dTableModel.addRow(new Object[]{user.getId(), user.getUser(), user.getPass(), user.getType()});
+            dTableModel.addRow(new Object[]{user.getId(), user.getUser(),user.getFakePass(), user.getType()});
         }
     }
     
@@ -171,7 +172,9 @@ public class ListUserJPanel extends javax.swing.JPanel {
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
+        
         new AddUserFrame().setVisible(true);
+        new AddUserFrame().setLocationRelativeTo(null);
         this.disable();
         dTableModel.setRowCount(0);
         setTableData(userService.getAllUsers());

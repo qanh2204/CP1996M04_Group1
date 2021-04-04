@@ -11,6 +11,9 @@ import model.Patient;
 import service.PatientService;
 import javax.swing.JOptionPane;
 import java.awt.Font;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -202,11 +205,15 @@ public class ListPatientJPanel extends javax.swing.JPanel {
         if (row == -1) {
             JOptionPane.showMessageDialog(ListPatientJPanel.this, "Please select patient first", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            int patientId = Integer.valueOf(String.valueOf(patientTable.getValueAt(row, 0)));
-            EditPatientFrame a = new EditPatientFrame(patientId);
-            a.setVisible(true);
-            a.setLocationRelativeTo(null);
-            this.disable();
+            try {
+                int patientId = Integer.valueOf(String.valueOf(patientTable.getValueAt(row, 0)));
+                EditPatientFrame a = new EditPatientFrame(patientId);
+                a.setVisible(true);
+                a.setLocationRelativeTo(null);
+                this.disable();
+            } catch (ParseException ex) {
+                Logger.getLogger(ListPatientJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_editBtnActionPerformed
 

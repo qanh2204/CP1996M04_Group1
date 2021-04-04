@@ -15,6 +15,8 @@ public class User {
     private String user;
     private String pass;
     private String type;
+    private String fakePass = "********";
+    
 
     public User(String id, String user, String pass, String type) {
         this.id = id;
@@ -24,6 +26,10 @@ public class User {
     }
 
     public User() {
+    }
+
+    public String getFakePass() {
+        return fakePass;
     }
 
 

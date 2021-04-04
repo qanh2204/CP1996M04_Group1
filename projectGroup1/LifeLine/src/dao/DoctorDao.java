@@ -49,7 +49,7 @@ public class DoctorDao {
     public void updateDoctor(Doctor doctor) {
        
         Connection conn = dao.JDBCConection.getConnection();
-        String sql = "update Doctor set D_name = ?, addr = ?, P_no = ?, specialization = ?, id = ? where doctor_id = ?";
+        String sql = "update Doctor set D_name = ?, address = ?, P_no = ?, specialization = ?, id = ? where doctor_id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class DoctorDao {
     
     public void addDoctor(Doctor doctor) {
         Connection conn = JDBCConection.getConnection();
-        String sql = "insert into Doctor(doctor_id, D_name , addr , P_no , specialization, id) values(?,?,?,?,?,?)";
+        String sql = "insert into Doctor(doctor_id, D_name , address , P_no , specialization, id) values(?,?,?,?,?,?)";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class DoctorDao {
             System.out.println(rs);
 
         } catch (SQLException e) {
-            
+            e.printStackTrace();
         }
     }
     
@@ -113,12 +113,11 @@ public class DoctorDao {
             PreparedStatement pStatement = conn.prepareStatement(sql);
             pStatement.setInt(1, id);
             ResultSet rs = pStatement.executeQuery();
-            while (rs.next()) {
+            while (rs.next()) {                
                 Doctor doctor = new Doctor();
-                
                 doctor.setId(rs.getInt("doctor_id"));
                 doctor.setDname(rs.getString("D_name"));
-                doctor.setAddr(rs.getString("addr"));
+                doctor.setAddr(rs.getString("address"));
                 doctor.setPhone(rs.getString("P_no"));
                 doctor.setSpe(rs.getString("specialization"));
                 doctor.setAccountId(rs.getString("id"));
@@ -126,6 +125,7 @@ public class DoctorDao {
                 return doctor;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -50,7 +50,7 @@ public class PatDao {
     public void updatePatient(Patient patient) {
         //Connection conn = JDBCConection.getConnection();
         Connection conn = dao.JDBCConection.getConnection();
-        String sql = "update Patient set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ?, = ? where patient_id = ?";
+        String sql = "update Patient set F_name = ?, L_name = ?, Doj = ?, Dept = ?, addr = ?, P_no = ?, gender = ?, Dob = ? where patient_id = ?";
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
@@ -63,7 +63,7 @@ public class PatDao {
             pStatement.setString(6, patient.getPhone());
             pStatement.setString(7, patient.getSex());
             pStatement.setString(8, patient.getDob());
-            pStatement.setInt(10, patient.getId());
+            pStatement.setInt(9, patient.getId());
             
             int rs = pStatement.executeUpdate();
             System.out.println(rs);

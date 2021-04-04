@@ -27,22 +27,8 @@ public class AddUserFrame extends javax.swing.JFrame {
         initComponents();
         userService = new UserService();
         user = new User();
-//        String type = "adm";
-//        if (adRadioButton.isSelected()) {
-//            type = "adm";
-//            autoIDAd();
-//
-//        }
-//        if (docRadioButton.isSelected()) {
-//            type = "doc";
-//            autoIDDo();
-//
-//        }
-//        if (staRadioButton.isSelected()) {
-//            type = "sta";
-//            autoIDSt();
-//
-//        }
+        this.setLocationRelativeTo(null);
+       
     }
 
     private void autoIDAd() {
@@ -52,14 +38,14 @@ public class AddUserFrame extends javax.swing.JFrame {
             cn = dao.JDBCConection.getConnection();
             PreparedStatement pstm;
             ResultSet rs;
-            sql = "Select top 1 id from Account order by id desc";
+            sql = "Select top 1 id from Account where type ='adm' order by id desc";
             pstm = cn.prepareStatement(sql);
             rs = pstm.executeQuery();
             rs.next();
             String test = rs.getString("id");
             String subtest = test.substring(3, 6);
             Integer subnum = Integer.parseInt(subtest) + 1;
-            
+
             if (subnum > 0 && subnum < 10) {
                 txtId.setText("adm00" + subnum);
             } else if (subnum < 100) {
@@ -80,14 +66,14 @@ public class AddUserFrame extends javax.swing.JFrame {
             cn = dao.JDBCConection.getConnection();
             PreparedStatement pstm;
             ResultSet rs;
-            sql = "Select top 1 id from Account order by id desc";
+            sql = "Select top 1 id from Account where type ='doc' order by id desc";
             pstm = cn.prepareStatement(sql);
             rs = pstm.executeQuery();
             rs.next();
             String test = rs.getString("id");
             String subtest = test.substring(3, 6);
             Integer subnum = Integer.parseInt(subtest) + 1;
-            
+
             if (subnum > 0 && subnum < 10) {
                 txtId.setText("doc00" + subnum);
             } else if (subnum < 100) {
@@ -107,14 +93,14 @@ public class AddUserFrame extends javax.swing.JFrame {
             cn = dao.JDBCConection.getConnection();
             PreparedStatement pstm;
             ResultSet rs;
-            sql = "Select top 1 id from Account order by id desc";
+            sql = "Select top 1 id from Account where type ='sta' order by id desc";
             pstm = cn.prepareStatement(sql);
             rs = pstm.executeQuery();
             rs.next();
             String test = rs.getString("id");
             String subtest = test.substring(3, 6);
             Integer subnum = Integer.parseInt(subtest) + 1;
-        
+
             if (subnum > 0 && subnum < 10) {
                 txtId.setText("sta00" + subnum);
             } else if (subnum < 100) {
@@ -185,7 +171,7 @@ public class AddUserFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("User Name ");
 
@@ -202,12 +188,27 @@ public class AddUserFrame extends javax.swing.JFrame {
         buttonGroup1.add(adRadioButton);
         adRadioButton.setSelected(true);
         adRadioButton.setText("Admin");
+        adRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adRadioButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(staRadioButton);
         staRadioButton.setText("Staff");
+        staRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staRadioButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(docRadioButton);
         docRadioButton.setText("Doctor");
+        docRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                docRadioButtonActionPerformed(evt);
+            }
+        });
 
         backBtn.setText("Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -258,12 +259,16 @@ public class AddUserFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(jLabel3))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtUser)
@@ -274,13 +279,12 @@ public class AddUserFrame extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(docRadioButton)
                                 .addGap(50, 50, 50)
-                                .addComponent(staRadioButton))))
+                                .addComponent(staRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(sbBtn)
+                        .addGap(52, 52, 52)
+                        .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backBtn)
-                        .addGap(68, 68, 68)))
+                        .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -290,27 +294,28 @@ public class AddUserFrame extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtUser, javax.swing.GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(staRadioButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(adRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(docRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(adRadioButton)
-                    .addComponent(docRadioButton)
-                    .addComponent(staRadioButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backBtn)
-                    .addComponent(sbBtn))
-                .addGap(82, 82, 82))
+                    .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         pack();
@@ -331,13 +336,11 @@ public class AddUserFrame extends javax.swing.JFrame {
                 type = "adm";
                 autoIDAd();
 
-            }
-            if (docRadioButton.isSelected()) {
+            }else if (docRadioButton.isSelected()) {
                 type = "doc";
                 autoIDDo();
 
-            }
-            if (staRadioButton.isSelected()) {
+            }else if(staRadioButton.isSelected()) {
                 type = "sta";
                 autoIDSt();
 
@@ -347,14 +350,36 @@ public class AddUserFrame extends javax.swing.JFrame {
             user.setId(txtId.getText());
             userService.addUser(user);
             JOptionPane.showMessageDialog(this, "Add Success");
+            
             new ListUserJPanel().setVisible(true);
+            new ListUserJPanel().refresh();
             this.dispose();
-
+        }else {
+            JOptionPane.showMessageDialog(null, "Add Fail!");
+        }
     }//GEN-LAST:event_sbBtnActionPerformed
-    }
+    
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUserActionPerformed
+
+    private void adRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adRadioButtonActionPerformed
+        // TODO add your handling code here:
+        autoIDAd();
+        user.setId(txtId.getText());
+    }//GEN-LAST:event_adRadioButtonActionPerformed
+
+    private void docRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docRadioButtonActionPerformed
+        // TODO add your handling code here:
+        autoIDDo();
+        user.setId(txtId.getText());
+    }//GEN-LAST:event_docRadioButtonActionPerformed
+
+    private void staRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staRadioButtonActionPerformed
+        // TODO add your handling code here:
+        autoIDSt();
+        user.setId(txtId.getText());
+    }//GEN-LAST:event_staRadioButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

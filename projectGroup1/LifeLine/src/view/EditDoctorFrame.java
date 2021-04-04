@@ -16,10 +16,10 @@ import service.DoctorService;
  * @author qanh2
  */
 public class EditDoctorFrame extends javax.swing.JFrame {
-    
+
     DoctorService doctorService;
     private Doctor doctor;
-    
+
     public EditDoctorFrame(int doctorId) {
         doctorService = new DoctorService();
         doctor = doctorService.getDoctorById(doctorId);
@@ -31,12 +31,13 @@ public class EditDoctorFrame extends javax.swing.JFrame {
         txtPno.setText(doctor.getPhone());
         txtSpe.setText(doctor.getSpe());
         txtAccId.setText(doctor.getAccountId());
+        this.setLocationRelativeTo(null);
     }
-    
+
     private boolean validateform() {
         String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
         String phonePattern = "^[0-9]{10,12}$";
-        
+
         String str;
         Pattern ptn;
         Matcher mc;
@@ -60,11 +61,7 @@ public class EditDoctorFrame extends javax.swing.JFrame {
                 txtAddr.grabFocus();
                 throw new Exception("Address cannot be blank");
             }
-            mc = ptn.matcher(str);
-            if (!mc.matches()) {
-                txtAddr.grabFocus();
-                throw new Exception(" Address contain more blank");
-            }
+            
 
             //phone
             str = txtPno.getText();
@@ -79,7 +76,7 @@ public class EditDoctorFrame extends javax.swing.JFrame {
                 txtPno.grabFocus();
                 throw new Exception("Phone must be 10-12 digits");
             }
-            
+
             return true;
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Phone must be a number");
@@ -116,7 +113,7 @@ public class EditDoctorFrame extends javax.swing.JFrame {
         txtAccId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         backBtn.setText("Back");
@@ -152,7 +149,7 @@ public class EditDoctorFrame extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(102, 176, 50));
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("EDIT STAFF");
+        jLabel1.setText("EDIT DOCTOR");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -277,14 +274,14 @@ public class EditDoctorFrame extends javax.swing.JFrame {
             doctor.setPhone(txtPno.getText());
             doctor.setSpe(txtSpe.getText());
             doctor.setAccountId(txtAccId.getText());
-            
+
             doctorService.updateDoctor(doctor);
             JOptionPane.showMessageDialog(this, "Edit Success");
             new ListDoctorJPanel().setVisible(true);
             this.dispose();
-
+        }
     }//GEN-LAST:event_sbBtnActionPerformed
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;

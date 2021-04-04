@@ -32,7 +32,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         doctor = new Doctor();
         UserService userService = new UserService();
         showCbData(userService.getIdUserForDoctor());
-        //autoDoctorID();
+        autoDoctorID();
+        this.setLocationRelativeTo(null);
     }
 
     private void showCbData(List<String> doctors) {
@@ -41,88 +42,90 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         }
     }
 
-//    private void autoDoctorID() {
-//        int autoID;
-//        try {
-//            String sql;
-//            Connection cn;
-//            cn = dao.JDBCConection.getConnection();
-//            PreparedStatement pstm;
-//            ResultSet rs;
-//            sql = "Select max(doctor_id) from Doctor";
-//            pstm = cn.prepareStatement(sql);
-//            rs = pstm.executeQuery();
-//
-//            if (rs.next()) {
-//                autoID = rs.getInt(1);
-//                autoID++;
-//                txtId.setText(Integer.toString(autoID));
-//            } else {
-//                txtId.setText("1");
-//            }
-//
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//        }
-//
-//    }
+    private void autoDoctorID() {
+        int autoID;
+        try {
+            String sql;
+            Connection cn;
+            cn = dao.JDBCConection.getConnection();
+            PreparedStatement pstm;
+            ResultSet rs;
+            sql = "Select max(doctor_id) from Doctor";
+            pstm = cn.prepareStatement(sql);
+            rs = pstm.executeQuery();
 
-//    private boolean validateform() {
-//        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
-//        String phonePattern = "^[0-9]{10,12}$";
-//
-//        String str;
-//        Pattern ptn;
-//        Matcher mc;
-//        try {
-//            //Doctor Name
-//            str = txtDName.getText();
-//            if (str.isEmpty()) {
-//                txtDName.grabFocus();
-//                throw new Exception("Doctor Name cannot be blank");
-//            }
-//            ptn = Pattern.compile(textPattern);
-//            mc = ptn.matcher(str);
-//            if (!mc.matches()) {
-//                txtDName.grabFocus();
-//                throw new Exception("Doctor Name contain more blank");
-//            }
-//
-//            //addr
-//            str = txtAddr.getText();
-//            if (str.isEmpty()) {
-//                txtAddr.grabFocus();
-//                throw new Exception("Address cannot be blank");
-//            }
-//            mc = ptn.matcher(str);
-//            if (!mc.matches()) {
-//                txtAddr.grabFocus();
-//                throw new Exception(" Address contain more blank");
-//            }
-//
-//            //phone
-//            str = txtPno.getText();
-//            if (str.isEmpty()) {
-//                txtPno.grabFocus();
-//                throw new Exception("Phone cannot be blank");
-//            }
-//            str = txtPno.getText();
-//            ptn = Pattern.compile(phonePattern);
-//            mc = ptn.matcher(str);
-//            if (!mc.matches()) {
-//                txtPno.grabFocus();
-//                throw new Exception("Phone must be 10-12 digits");
-//            }
-//
-//            return true;
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(this, "Phone must be a number");
-//            return false;
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, e.getMessage());
-//            return false;
-//        }
-//    }
+            if (rs.next()) {
+                autoID = rs.getInt(1);
+                autoID++;
+                txtId.setText(Integer.toString(autoID));
+            } else {
+                txtId.setText("1");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+        String phonePattern = "^[0-9]{10,11}$";
+
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //Doctor Name
+            str = txtDName.getText();
+            if (str.isEmpty()) {
+                txtDName.grabFocus();
+                throw new Exception("Doctor Name cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtDName.grabFocus();
+                throw new Exception("Doctor Name cannot more blank");
+            }
+
+            //addr
+            str = txtAddr.getText();
+            if (str.isEmpty()) {
+                txtAddr.grabFocus();
+                throw new Exception("Address cannot be blank");
+            }        
+            
+            //Specialization
+            str = txtSpe.getText();
+            if (str.isEmpty()) {
+                txtSpe.grabFocus();
+                throw new Exception("Specialization cannot be blank");
+            }            
+
+            //phone
+            str = txtPno.getText();
+            if (str.isEmpty()) {
+                txtPno.grabFocus();
+                throw new Exception("Phone cannot be blank");
+            }
+            str = txtPno.getText();
+            ptn = Pattern.compile(phonePattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtPno.grabFocus();
+                throw new Exception("Phone must be 10-11 digits");
+            }
+
+            return true;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Phone must be a number");
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,7 +153,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         backBtn.setText("Back");
@@ -208,6 +211,8 @@ public class AddDoctorFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setText("Account ID");
+
+        txtId.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -295,7 +300,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
-      //  if (validateform() == true) {
+        if (validateform() == true) {
 
             doctor.setId(Integer.parseInt(txtId.getText()));
             doctor.setDname(txtDName.getText());
@@ -311,7 +316,9 @@ public class AddDoctorFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Add Success");
             new ListDoctorJPanel().setVisible(true);
             this.dispose();
-      //  }
+        }else {
+            JOptionPane.showMessageDialog(null, "Add Fail!");
+        }
     }//GEN-LAST:event_sbBtnActionPerformed
      
     private void accIdCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accIdCbActionPerformed

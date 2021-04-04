@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import model.Stock;
 import service.StockService;
 
@@ -27,8 +30,75 @@ public class EditStockFrame extends javax.swing.JFrame {
         txtIcost.setText(String.valueOf(stock.getIcost()));
         txtInum.setText(String.valueOf(stock.getInum()));
         txtDnum.setText(String.valueOf(stock.getDnum()));
+        this.setLocationRelativeTo(null);
     }
 
+     private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+        String numberPattern = "^[0-9]{1,20}$";
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //Iteam Name
+            str = txtIname.getText();
+            if (str.isEmpty()) {
+                txtIname.grabFocus();
+                throw new Exception("Iteam Name cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtIname.grabFocus();
+                throw new Exception("Iteam Name contain more blank");
+            }
+            //Iteam Cost
+            str = txtIcost.getText();
+            if (str.isEmpty()) {
+                txtIcost.grabFocus();
+                throw new Exception("Iteam Cost cannot be blank");
+            }
+            ptn = Pattern.compile(numberPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtIcost.grabFocus();
+                throw new Exception("Iteam Cost must a number");
+            }
+            //Item Available
+            str = txtInum.getText();
+            if (str.isEmpty()) {
+                txtInum.grabFocus();
+                throw new Exception("Iteam Cost cannot be blank");
+            }
+            ptn = Pattern.compile(numberPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtInum.grabFocus();
+                throw new Exception("Iteam Cost must a number");
+            }
+            //Items Consumed
+            str = txtDnum.getText();
+            if (str.isEmpty()) {
+                txtDnum.grabFocus();
+                throw new Exception("Iteam Cost cannot be blank");
+            }
+            ptn = Pattern.compile(numberPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtDnum.grabFocus();
+                throw new Exception("Iteam Cost must a number");
+            }
+            
+            return true;
+
+        }catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a number");
+            return false;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +108,6 @@ public class EditStockFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         txtIname = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -54,7 +123,7 @@ public class EditStockFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -193,6 +262,7 @@ public class EditStockFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
+        if (validateform() == true) {
         stock.setId(Integer.parseInt(txtId.getText()));
         stock.setIname(txtIname.getText());
         stock.setIcost(Integer.parseInt(txtIcost.getText()));
@@ -203,7 +273,9 @@ public class EditStockFrame extends javax.swing.JFrame {
 
         new ListStockJPanel().setVisible(true);
         this.dispose();
-        
+        }else {
+            JOptionPane.showMessageDialog(null, "Add Fail!");
+        }
     }//GEN-LAST:event_sbBtnActionPerformed
 
     private void txtIcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIcostActionPerformed
@@ -214,7 +286,6 @@ public class EditStockFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
