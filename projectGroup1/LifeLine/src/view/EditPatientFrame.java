@@ -53,7 +53,7 @@ public class EditPatientFrame extends javax.swing.JFrame {
 
     private boolean validateform() {
         String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
-        String phonePattern = "^[0-9]{10,12}$";
+        String phonePattern = "^[0-9]{10,11}$";
 
         String str;
         Pattern ptn;
@@ -114,7 +114,7 @@ public class EditPatientFrame extends javax.swing.JFrame {
             mc = ptn.matcher(str);
             if (!mc.matches()) {
                 txtPno.grabFocus();
-                throw new Exception("Phone must be 10-12 digits");
+                throw new Exception("Phone must be 10-11 digits");
             }
 
             return true;

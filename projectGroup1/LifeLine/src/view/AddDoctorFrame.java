@@ -70,7 +70,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
 
     private boolean validateform() {
         String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
-        String phonePattern = "^[0-9]{10,11}$";
+        String phonePattern = "^[0]+[0-9]{10,11}$";
 
         String str;
         Pattern ptn;
