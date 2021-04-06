@@ -37,7 +37,7 @@ public class Control_Staff {
 
         root.removeAll();
         root.setLayout(new BorderLayout());
-        root.add(new ListStaffJPanel());
+        root.add(new ListPatientJPanel());
         root.validate();
         root.repaint();
     }

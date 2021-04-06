@@ -61,7 +61,6 @@ public class EditDoctorFrame extends javax.swing.JFrame {
                 txtAddr.grabFocus();
                 throw new Exception("Address cannot be blank");
             }
-            
 
             //phone
             str = txtPno.getText();
@@ -281,7 +280,7 @@ public class EditDoctorFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_sbBtnActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;

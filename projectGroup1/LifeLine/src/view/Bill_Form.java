@@ -7,20 +7,28 @@ package view;
 
 import dao.BillDAO;
 import dao.BillDetailDAO;
+import dao.JDBCConection;
 import dao.PatientDAO;
 import dao.TestDAO;
 import model.Bill;
 import java.awt.Font;
+import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.Bill_Detail;
 import service.DoctorService;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -112,6 +120,21 @@ public class Bill_Form extends javax.swing.JPanel {
         showBillDetail(bill_no);
     }
 
+    public void PrintBill(int bill_no, String date) {
+        try {
+            Hashtable map = new Hashtable();
+            JasperReport report = JasperCompileManager.compileReport("src/view/BillText.jrxml");
+
+            map.put("bill_no", bill_no);
+            map.put("Date", date);
+
+            JasperPrint p = JasperFillManager.fillReport(report, map, JDBCConection.getConnection());
+            JasperViewer.viewReport(p, false);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -133,6 +156,7 @@ public class Bill_Form extends javax.swing.JPanel {
         tblBillDetail = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
 
+        tblBill.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblBill.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -258,6 +282,7 @@ public class Bill_Form extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblBillDetail.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         tblBillDetail.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -393,7 +418,15 @@ public class Bill_Form extends javax.swing.JPanel {
     }//GEN-LAST:event_tblBillMouseClicked
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
+        int selectedIndex = tblBill.getSelectedRow();
+        long millis = System.currentTimeMillis();
+        Date day = new Date(millis);
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String d=format.format(day);
+        Bill bill = rp.get(selectedIndex);
+        if (selectedIndex != -1) {
+            PrintBill(bill.getBill_no(),d);
+        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed

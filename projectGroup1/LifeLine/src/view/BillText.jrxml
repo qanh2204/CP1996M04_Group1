@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="297" pageHeight="421" columnWidth="257" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="463c9251-18f0-4d4e-ac40-cf5849016820">
+	<property name="ireport.zoom" value="2.1435888100000016"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="51"/>
+	<parameter name="bill_no" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Date" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     BillDetail."test_id" AS BillDetail_test_id,
+     BillDetail."cost" AS BillDetail_cost,
+     Billing."bill_no" AS Billing_bill_no,
+     Billing."amount" AS Billing_amount,
+     Billing."DayBuy" AS Billing_DayBuy,
+     Patient."F_name" AS Patient_F_name,
+     Patient."L_name" AS Patient_L_name,
+     Patient."addr" AS Patient_addr,
+     Patient."P_no" AS Patient_P_no,
+     Patient."gender" AS Patient_gender,
+     Patient."Dob" AS Patient_Dob,
+     Test."test_id" AS Test_test_id,
+     Test."t_name" AS Test_t_name,
+     Test."cost" AS Test_cost,
+     Billing."patient_id" AS Billing_patient_id
+FROM
+     "dbo"."Billing" Billing INNER JOIN "dbo"."BillDetail" BillDetail ON Billing."bill_no" = BillDetail."bill_no"
+     INNER JOIN "dbo"."Patient" Patient ON Billing."patient_id" = Patient."patient_id"
+     INNER JOIN "dbo"."Test" Test ON BillDetail."test_id" = Test."test_id"
+WHERE
+     Billing."bill_no" = $P{bill_no}]]>
+	</queryString>
+	<field name="BillDetail_test_id" class="java.lang.Integer"/>
+	<field name="BillDetail_cost" class="java.lang.Integer"/>
+	<field name="Billing_bill_no" class="java.lang.Integer"/>
+	<field name="Billing_amount" class="java.lang.Integer"/>
+	<field name="Billing_DayBuy" class="java.sql.Date"/>
+	<field name="Patient_F_name" class="java.lang.String"/>
+	<field name="Patient_L_name" class="java.lang.String"/>
+	<field name="Patient_addr" class="java.lang.String"/>
+	<field name="Patient_P_no" class="java.lang.String"/>
+	<field name="Patient_gender" class="java.lang.String"/>
+	<field name="Patient_Dob" class="java.sql.Date"/>
+	<field name="Test_test_id" class="java.lang.Integer"/>
+	<field name="Test_t_name" class="java.lang.String"/>
+	<field name="Test_cost" class="java.lang.Integer"/>
+	<field name="Billing_patient_id" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="64" splitType="Stretch">
+			<staticText>
+				<reportElement x="58" y="0" width="140" height="31" uuid="9c4d3bdb-8b80-4e9c-b701-e01391a1e9dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LIFE LINE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="41" width="61" height="16" uuid="ac0fcf70-4bb8-400a-84d6-baeb232a90c9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date of test:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="5" y="41" width="38" height="16" uuid="e5f80cf3-5c81-489d-9b59-83419d8aa4da"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Bill No:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="43" y="41" width="52" height="16" uuid="119c7b85-1952-47d7-b46b-95a0fe076a26"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Billing_bill_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="41" width="91" height="16" uuid="7461d8db-c3be-4b11-81e6-a7ffd6fbc776"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Date}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="61" y="8" width="110" height="19" uuid="08d4d84f-190f-4ad8-9b44-128ee98b5812"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Patient_F_name} + " " +$F{Patient_L_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="4" y="8" width="57" height="19" uuid="17750c4f-de39-4c12-a05d-b069c75f0811"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Patient Name:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="8" width="39" height="19" uuid="4b41175d-8dcb-4971-bab2-206e70f120ce"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gender:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="37" width="39" height="20" uuid="7a15052b-d370-4f52-8a6f-3c45f2164f19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Address:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="37" width="29" height="20" uuid="30b5ba72-255d-44e4-a9d3-9d992f7346c8"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="184" y="37" width="72" height="20" uuid="28ac50c8-cba0-4753-822a-96c16be87fb8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Patient_P_no}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="37" width="112" height="20" uuid="b0f104a5-8bc2-4923-a379-daebb374575a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Patient_addr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="8" width="46" height="19" uuid="a275f0a5-3d04-417d-b60b-990e4cdf598a"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Patient_gender}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="0" width="116" height="20" uuid="90a23358-fc28-4567-96ea-ce2d81654fe3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Test name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="0" width="101" height="20" uuid="e6fc868f-c8da-4461-8601-d3205c1dadd6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cost]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="39" height="20" uuid="5df574c1-5ece-421a-9557-a87822955bf6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Test ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="59" splitType="Stretch">
+			<textField>
+				<reportElement x="39" y="1" width="116" height="20" uuid="5c4d40ba-125c-40c6-82b3-5401ccb6dede"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Test_t_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="155" y="1" width="101" height="20" uuid="8e75fbad-531c-45a9-a97f-181a2a92cf99"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Test_cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="39" height="21" uuid="a29de8e7-92b5-4f9a-8e65-7c026ffab995"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Test_test_id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="95" y="0" width="37" height="20" uuid="7851fba9-40e4-45bd-a652-730a35656dbd"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="0" width="112" height="20" uuid="3be54c2a-efe9-4b39-b8bc-42744395cada"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Billing_amount}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

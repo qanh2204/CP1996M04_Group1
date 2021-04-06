@@ -6,6 +6,7 @@
 package view;
 
 import dao.UserDao;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,8 +21,6 @@ public class Login_Form extends javax.swing.JFrame {
     public Login_Form() {
         initComponents();
     }
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -61,6 +60,12 @@ public class Login_Form extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnSigIn.setBackground(new java.awt.Color(204, 255, 204));
         btnSigIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -200,7 +205,46 @@ public class Login_Form extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            UserDao userDao = new UserDao();
+            String user = txtUsername.getText();
+            String pass = new String(txtPassword.getPassword());
+            String type = userDao.getType(user, pass);
+
+            if (user.length() == 0 || pass.length() == 0) {
+                JOptionPane.showMessageDialog(this, "Username or password are not empty", "Notification", JOptionPane.WARNING_MESSAGE);
+            } else if (type.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(this, "Username or password is incorrect", "Notification", JOptionPane.WARNING_MESSAGE);
+            } else if (type.equals("adm")) {
+                this.dispose();
+                //ListUserFrame userFrame = new ListUserFrame();
+                MainUserFrame userFrame = new MainUserFrame();
+                userFrame.setTitle("Admin Form");
+                userFrame.setResizable(false);
+                userFrame.setLocationRelativeTo(null);
+                userFrame.setVisible(true);
+
+            } else if (type.equals("sta")) {
+                this.dispose();
+                MainStaffFrame staffFrame = new MainStaffFrame();
+                staffFrame.setTitle("Staff Form");
+                staffFrame.setResizable(false);
+                staffFrame.setLocationRelativeTo(null);
+                staffFrame.setVisible(true);
+
+            } else if (type.equals("doc")) {
+                this.dispose();
+                Form_docter docterFrame = new Form_docter();
+                docterFrame.setTitle("Docter Form");
+                docterFrame.setResizable(false);
+                docterFrame.setLocationRelativeTo(null);
+                docterFrame.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_txtPasswordKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSigIn;

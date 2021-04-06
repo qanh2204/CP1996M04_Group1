@@ -6,6 +6,8 @@
 package view;
 
 import dao.UserDao;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,12 +22,52 @@ public class ChangePassword extends javax.swing.JPanel {
     public ChangePassword() {
         initComponents();
     }
-    
-    public void clear(){
+
+    public void clear() {
         txtUserName.setText("");
         txtOldPass.setText("");
         txtNewPass.setText("");
         txtConfirm.setText("");
+    }
+
+    private boolean validateform() {
+        String textPattern = "^[a-zA-Z0-9]+( [a-zA-Z0-9]+)*$";
+
+        String str;
+        Pattern ptn;
+        Matcher mc;
+        try {
+            //login name
+            str = txtUserName.getText();
+            if (str.isEmpty()) {
+                txtUserName.grabFocus();
+                throw new Exception("Login cannot be blank");
+            }
+            ptn = Pattern.compile(textPattern);
+            mc = ptn.matcher(str);
+            if (!mc.matches()) {
+                txtUserName.grabFocus();
+                throw new Exception("Login Name contain more blank");
+            }
+            //pass
+            str = new String(txtNewPass.getPassword());
+            if (str.length() < 4 || str.length() > 12) {
+                txtNewPass.grabFocus();
+                throw new Exception("Password must be greater than 4 and lesser than 12.");
+            }
+            return true;
+            //old pass
+//            str = new String(txtOldPass.getText());
+//            if (str.length() < 4 || str.length() > 12) {
+//                txtOldPass.grabFocus();
+//                throw new Exception("Password must be greater than 4 and lesser than 12.");
+//            }
+//            return true;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            return false;
+        }
     }
 
     /**
@@ -167,26 +209,29 @@ public class ChangePassword extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChangeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangeMouseClicked
-        UserDao userDao = new UserDao();
-        String user_name = txtUserName.getText().trim();
-        String old_password = new String(txtOldPass.getPassword());
-        String new_password = new String(txtNewPass.getPassword());
-        String confirm = new String(txtConfirm.getPassword());
-        String notice = "";
-        //System.out.println(user_name + " " + old_password + " " + new_password +" " + confirm);
-        if (new_password.equals(confirm) == false) {
-            notice += "Confirm password and new password doesn't match\n";
+        if (validateform() == true) {
+            UserDao userDao = new UserDao();
+            String user_name = txtUserName.getText().trim();
+            String old_password = new String(txtOldPass.getPassword());
+            String new_password = new String(txtNewPass.getPassword());
+            String confirm = new String(txtConfirm.getPassword());
+            String notice = "";
+            //System.out.println(user_name + " " + old_password + " " + new_password +" " + confirm);
+            if (new_password.equals(confirm) == false) {
+                notice += "Confirm password and new password doesn't match\n";
 
-        } else if (userDao.getType(user_name, old_password) == null) {
-            notice += "Password and Username doesn't exist\n";
+            } else if (userDao.getType(user_name, old_password) == null) {
+                notice += "Password and Username doesn't exist\n";
 
-            notice += "Old password and new password cannot be the same\n";
-        } else {
-            userDao.setPass(user_name, old_password, new_password);
-            clear();
-            notice += "Change password completely!";
+                notice += "Old password and new password cannot be the same\n";
+            } else {
+                userDao.setPass(user_name, old_password, new_password);
+                clear();
+                notice += "Change password completely!";
+            }
+            txtNotification.setText(notice);
         }
-        txtNotification.setText(notice);
+
     }//GEN-LAST:event_btnChangeMouseClicked
 
 
