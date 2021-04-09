@@ -39,4 +39,8 @@ public class StaffService {
     public void updateStaff(Staff staff){
         staffDao.updateStaff(staff);
     }
+    
+    public String getName(String id){
+        return staffDao.getName(id);
+    }
 }

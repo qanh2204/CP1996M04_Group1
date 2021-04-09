@@ -7,12 +7,14 @@ package view;
 
 import dao.BillDAO;
 import dao.BillDetailDAO;
+import dao.HistoryDAO;
 import dao.JDBCConection;
 import dao.PatientDAO;
+import dao.StaffDao;
 import dao.TestDAO;
+import dao.UserDao;
 import model.Bill;
 import java.awt.Font;
-import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import service.StaffService;
 
 /**
  *
@@ -121,12 +124,16 @@ public class Bill_Form extends javax.swing.JPanel {
     }
 
     public void PrintBill(int bill_no, String date) {
+        StaffService staff = new StaffService();
+        String id = HistoryDAO.findID();
+        String name = staff.getName(id);
         try {
             Hashtable map = new Hashtable();
             JasperReport report = JasperCompileManager.compileReport("src/view/BillText.jrxml");
 
             map.put("bill_no", bill_no);
             map.put("Date", date);
+            map.put("Staff", name);
 
             JasperPrint p = JasperFillManager.fillReport(report, map, JDBCConection.getConnection());
             JasperViewer.viewReport(p, false);
@@ -422,10 +429,10 @@ public class Bill_Form extends javax.swing.JPanel {
         long millis = System.currentTimeMillis();
         Date day = new Date(millis);
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String d=format.format(day);
+        String d = format.format(day);
         Bill bill = rp.get(selectedIndex);
         if (selectedIndex != -1) {
-            PrintBill(bill.getBill_no(),d);
+            PrintBill(bill.getBill_no(), d);
         }
     }//GEN-LAST:event_btnEditActionPerformed
 

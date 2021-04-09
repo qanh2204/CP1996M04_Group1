@@ -44,6 +44,10 @@ public class UserService {
     public String getType(String user, String pass) {
         return userDao.getType(user, pass);
     }
+    
+    public String getID(String user, String pass) {
+        return userDao.getID(user, pass);
+    }
 
     public List<String> getIdUserForStaff() {
         return userDao.getIdUsersForStaff();

@@ -40,7 +40,7 @@ public class StaffDao {
                 staff.setEdu(rs.getString("Edu_qual"));
                 staff.setSkill(rs.getString("Tech_skills"));
                 staff.setAccountId(rs.getString("id"));
-                
+
                 staffs.add(staff);
             }
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class StaffDao {
 
         try {
             PreparedStatement pStatement = conn.prepareStatement(sql);
-            
+
             pStatement.setString(1, staff.getFname());
             pStatement.setString(2, staff.getLname());
             pStatement.setString(3, staff.getDoj());
@@ -69,14 +69,14 @@ public class StaffDao {
             pStatement.setString(10, staff.getSkill());
             pStatement.setString(11, staff.getAccountId());
             pStatement.setInt(12, staff.getId());
-            
+
             int rs = pStatement.executeUpdate();
             System.out.println(rs);
 
         } catch (SQLException e) {
         }
     }
-    
+
     public void deleteStaff(int id) {
         Connection conn = JDBCConection.getConnection();
         String sql = "delete from Staff where staff_id = ?";
@@ -89,7 +89,7 @@ public class StaffDao {
         } catch (SQLException e) {
         }
     }
-    
+
     public void addStaff(Staff staff) {
         Connection conn = JDBCConection.getConnection();
         String sql = "insert into Staff(staff_id ,F_name ,L_name,Doj ,Dept ,addr ,P_no ,gender ,Dob ,Edu_qual ,Tech_skills,id) values(?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -115,9 +115,9 @@ public class StaffDao {
         } catch (SQLException e) {
         }
     }
-    
+
     public Staff getStaffsById(int id) {
-        
+
         Connection conn = JDBCConection.getConnection();
         String sql = "select * from Staff where staff_id = ?";
         try {
@@ -126,7 +126,7 @@ public class StaffDao {
             ResultSet rs = pStatement.executeQuery();
             while (rs.next()) {
                 Staff staff = new Staff();
-                
+
                 staff.setId(rs.getInt("staff_id"));
                 staff.setFname(rs.getString("F_name"));
                 staff.setLname(rs.getString("L_name"));
@@ -136,16 +136,33 @@ public class StaffDao {
                 staff.setPhone(rs.getString("P_no"));
                 staff.setSex(rs.getString("gender"));
                 staff.setDob(rs.getString("Dob"));
-                staff.setEdu(rs.getString("Edu_qual"));                
+                staff.setEdu(rs.getString("Edu_qual"));
                 staff.setSkill(rs.getString("Tech_skills"));
                 staff.setAccountId(rs.getString("id"));
-                
+
                 return staff;
             }
         } catch (SQLException e) {
         }
         return null;
     }
-    
-    
+
+    public String getName(String id) {
+        String name = "";
+        Connection conn = JDBCConection.getConnection();
+        String sql = "select F_name +' '+ L_name Name from Staff where id = ?";
+        try {
+            PreparedStatement pStatement = conn.prepareStatement(sql);
+            pStatement.setString(1, id);
+            ResultSet rs = pStatement.executeQuery();
+            while (rs.next()) {
+
+                name = rs.getString("Name");
+
+            }
+        } catch (SQLException e) {
+        }
+        return name;
+    }
+
 }

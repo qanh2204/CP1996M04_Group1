@@ -208,5 +208,47 @@ public class UserDao {
             e.printStackTrace();
         }
     }
+    
+    public String getID(String user, String pass) {
+        String ID = "";
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = JDBCConection.getConnection();
+
+            String sql = "select id from Account where username=? and pass=?";
+            statement = connection.prepareCall(sql);
+            statement.setString(1, user);
+            statement.setString(2, pass);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                ID = resultSet.getString("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+
+        return ID;
+    }
 
 }

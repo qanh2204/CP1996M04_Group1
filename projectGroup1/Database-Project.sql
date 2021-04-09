@@ -24,6 +24,8 @@ create table Staff(
 	FOREIGN KEY (id) REFERENCES Account(id)
 );
 
+insert into Staff values (1,'Nguyen','Thuy Van','2017-3-4','A','Can Tho','0859083181','female','2000-11-11','Can Tho University','A','STA001')
+
 create table Patient(
     patient_id int primary key,
 	F_name varchar(20) not null,
@@ -89,6 +91,13 @@ create table Report(
    CONSTRAINT fk_testid FOREIGN KEY (test_id) REFERENCES Test(test_id)
 ); 
 
+create table History(
+	STT int not null,
+	id varchar(6) not null,
+	current_day date not null,
+	FOREIGN KEY (id) REFERENCES Account(id)
+);
+
 insert into Account values ('ADM001','anh','123','adm');
 insert into Account values ('STA001','van','123','sta');
 insert into Account values ('DOC001','quang','123','doc');
@@ -107,4 +116,7 @@ insert into BillDetail values (1,2,1,200000,'2021-3-31');
 select sum(cost) as Total from BillDetail group by bill_no having bill_no=1
 
 select * from BillDetail
-select * from Billing
+select * from History
+
+insert into History values (1,'STA001','2021-4-6');
+insert into History values (2,'STA001','2021-4-6');

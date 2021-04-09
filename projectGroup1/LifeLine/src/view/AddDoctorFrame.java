@@ -116,6 +116,7 @@ public class AddDoctorFrame extends javax.swing.JFrame {
                 txtPno.grabFocus();
                 throw new Exception("Phone must be 10-11 digits");
             }
+            
 
             return true;
         } catch (NumberFormatException e) {
