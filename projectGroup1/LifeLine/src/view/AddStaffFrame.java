@@ -5,6 +5,8 @@
  */
 package view;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -42,6 +44,10 @@ public class AddStaffFrame extends javax.swing.JFrame {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
         txtDoj.setText(dateFormat1.format(dateCu));
         this.setLocationRelativeTo(null);
+        
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dobDate.getDateEditor();
+        editor.setEnabled(false);
     }
 
     private void showCbData(List<String> staffs) {
@@ -84,18 +90,7 @@ public class AddStaffFrame extends javax.swing.JFrame {
         Pattern ptn;
         Matcher mc;
         try {
-            //Department
-            str = txtDep.getText();
-            if (str.isEmpty()) {
-                txtDep.grabFocus();
-                throw new Exception("Department cannot be blank");
-            }
-            ptn = Pattern.compile(textPattern);
-            mc = ptn.matcher(str);
-            if (!mc.matches()) {
-                txtDep.grabFocus();
-                throw new Exception("Department contain more blank");
-            }
+
             //last name
             str = txtLastName.getText();
             if (str.isEmpty()) {
@@ -138,7 +133,6 @@ public class AddStaffFrame extends javax.swing.JFrame {
                 txtSkill.grabFocus();
                 throw new Exception("Technical Skill cannot be blank");
             }
-            
 
             //phone
             str = txtPno.getText();
@@ -191,7 +185,6 @@ public class AddStaffFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        txtDep = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
         txtFullName = new javax.swing.JTextField();
         txtAddr = new javax.swing.JTextField();
@@ -203,6 +196,8 @@ public class AddStaffFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         accIdCb = new javax.swing.JComboBox<>();
         dobDate = new com.toedter.calendar.JDateChooser();
+        otherRadioButton = new javax.swing.JRadioButton();
+        depComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -254,12 +249,6 @@ public class AddStaffFrame extends javax.swing.JFrame {
 
         jLabel13.setText("Technical Skill");
 
-        txtDep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDepActionPerformed(evt);
-            }
-        });
-
         jPanel3.setBackground(new java.awt.Color(102, 176, 50));
 
         jLabel1.setBackground(new java.awt.Color(102, 176, 50));
@@ -292,6 +281,13 @@ public class AddStaffFrame extends javax.swing.JFrame {
             }
         });
 
+        dobDate.setMinSelectableDate(new java.util.Date(-62135791093000L));
+
+        buttonGroup1.add(otherRadioButton);
+        otherRadioButton.setText("Other");
+
+        depComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1st Floor", "2nd Floor", "3rd Floor", "4th Floor" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -320,12 +316,12 @@ public class AddStaffFrame extends javax.swing.JFrame {
                             .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDoj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtSkill, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(dobDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(accIdCb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(accIdCb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(depComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,6 +331,8 @@ public class AddStaffFrame extends javax.swing.JFrame {
                                 .addComponent(maleRadioButton)
                                 .addGap(59, 59, 59)
                                 .addComponent(femaleRadioButton)
+                                .addGap(56, 56, 56)
+                                .addComponent(otherRadioButton)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -358,8 +356,8 @@ public class AddStaffFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDep, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(depComboBox))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
@@ -396,7 +394,9 @@ public class AddStaffFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(femaleRadioButton)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(femaleRadioButton)
+                                .addComponent(otherRadioButton))
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
@@ -420,9 +420,12 @@ public class AddStaffFrame extends javax.swing.JFrame {
     private void sbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sbBtnActionPerformed
         if (validateform() == true) {
 
-            staff.setId(Integer.parseInt(txtId.getText()));          
+            staff.setId(Integer.parseInt(txtId.getText()));
             staff.setDoj(txtDoj.getText());
-            staff.setDept(txtDep.getText());
+
+            String selectedItemD = (String) depComboBox.getSelectedItem();
+            staff.setDept(selectedItemD);
+
             staff.setLname(txtLastName.getText());
             staff.setFname(txtFullName.getText());
             staff.setAddr(txtAddr.getText());
@@ -443,20 +446,20 @@ public class AddStaffFrame extends javax.swing.JFrame {
             if (femaleRadioButton.isSelected()) {
                 sex = "female";
             }
+            if (otherRadioButton.isSelected()) {
+                sex = "other";
+            }
             staff.setSex(sex);
 
             staffService.addStaff(staff);
             JOptionPane.showMessageDialog(this, "Add Success");
             new ListStaffJPanel().setVisible(true);
+            new ListStaffJPanel().repaint();
             this.dispose();
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Add Fail!");
         }
     }//GEN-LAST:event_sbBtnActionPerformed
-
-    private void txtDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDepActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDepActionPerformed
 
     private void accIdCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accIdCbActionPerformed
         // TODO add your handling code here:
@@ -467,6 +470,7 @@ public class AddStaffFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> accIdCb;
     private javax.swing.JButton backBtn;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> depComboBox;
     private com.toedter.calendar.JDateChooser dobDate;
     private javax.swing.JRadioButton femaleRadioButton;
     private javax.swing.JLabel jLabel1;
@@ -484,9 +488,9 @@ public class AddStaffFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JRadioButton otherRadioButton;
     private javax.swing.JButton sbBtn;
     private javax.swing.JTextField txtAddr;
-    private javax.swing.JTextField txtDep;
     private javax.swing.JTextField txtDoj;
     private javax.swing.JTextField txtEdu;
     private javax.swing.JTextField txtFullName;

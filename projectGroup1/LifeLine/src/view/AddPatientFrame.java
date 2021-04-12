@@ -5,6 +5,7 @@
  */
 package view;
 
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,9 @@ public class AddPatientFrame extends javax.swing.JFrame {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy/MM/dd");
         txtDoj.setText(dateFormat1.format(dateCu));
         this.setLocationRelativeTo(null);
+        
+        JTextFieldDateEditor editor = (JTextFieldDateEditor) dobDate.getDateEditor();
+        editor.setEnabled(false);
     }
 
     private void autoPatientID() {
@@ -71,18 +75,7 @@ public class AddPatientFrame extends javax.swing.JFrame {
         Pattern ptn;
         Matcher mc;
         try {
-            //Department
-            str = txtDep.getText();
-            if (str.isEmpty()) {
-                txtDep.grabFocus();
-                throw new Exception("Department cannot be blank");
-            }
-            ptn = Pattern.compile(textPattern);
-            mc = ptn.matcher(str);
-            if (!mc.matches()) {
-                txtDep.grabFocus();
-                throw new Exception("Department contain more blank");
-            }
+            
             //last name
             str = txtLastName.getText();
             if (str.isEmpty()) {
@@ -163,7 +156,6 @@ public class AddPatientFrame extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        txtDep = new javax.swing.JTextField();
         txtLastName = new javax.swing.JTextField();
         txtFullName = new javax.swing.JTextField();
         txtAddr = new javax.swing.JTextField();
@@ -171,6 +163,9 @@ public class AddPatientFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         dobDate = new com.toedter.calendar.JDateChooser();
+        otherRadioButton = new javax.swing.JRadioButton();
+        depComboBox = new javax.swing.JComboBox<>();
+        depComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -184,9 +179,19 @@ public class AddPatientFrame extends javax.swing.JFrame {
         buttonGroup1.add(maleRadioButton);
         maleRadioButton.setSelected(true);
         maleRadioButton.setText("Male");
+        maleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                maleRadioButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(femaleRadioButton);
         femaleRadioButton.setText("Female");
+        femaleRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                femaleRadioButtonActionPerformed(evt);
+            }
+        });
 
         backBtn.setText("Back");
         backBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -218,12 +223,6 @@ public class AddPatientFrame extends javax.swing.JFrame {
 
         jLabel11.setText("Date of birth");
 
-        txtDep.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDepActionPerformed(evt);
-            }
-        });
-
         jPanel3.setBackground(new java.awt.Color(102, 176, 50));
 
         jLabel1.setBackground(new java.awt.Color(102, 176, 50));
@@ -247,6 +246,13 @@ public class AddPatientFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)
                 .addGap(9, 9, 9))
         );
+
+        buttonGroup1.add(otherRadioButton);
+        otherRadioButton.setText("Other");
+
+        depComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1st Floor", "2nd Floor", "3rd Floor", "4th Floor" }));
+
+        depComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1st Floor", "2nd Floor", "3rd Floor", "4th Floor" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -272,24 +278,32 @@ public class AddPatientFrame extends javax.swing.JFrame {
                             .addComponent(jLabel9)
                             .addComponent(jLabel11)
                             .addComponent(jLabel10))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDep, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDoj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dobDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtPno, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAddr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtFullName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtDoj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dobDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(depComboBox1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(maleRadioButton)
+                                .addGap(72, 72, 72)
+                                .addComponent(femaleRadioButton)
+                                .addGap(81, 81, 81)
+                                .addComponent(otherRadioButton)))))
                 .addGap(30, 30, 30))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(maleRadioButton)
-                .addGap(59, 59, 59)
-                .addComponent(femaleRadioButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(342, 342, 342)
+                    .addComponent(depComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(342, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,8 +319,8 @@ public class AddPatientFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtDep, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(depComboBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtLastName, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
@@ -331,12 +345,18 @@ public class AddPatientFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(maleRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(femaleRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(otherRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sbBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(367, 367, 367)
+                    .addComponent(depComboBox)
+                    .addGap(368, 368, 368)))
         );
 
         pack();
@@ -352,7 +372,8 @@ public class AddPatientFrame extends javax.swing.JFrame {
         if (validateform() == true) {
             patient.setId(Integer.parseInt(txtId.getText()));
             patient.setDoj(txtDoj.getText());
-            patient.setDept(txtDep.getText());
+            String selectedItemD = (String) depComboBox.getSelectedItem();
+            patient.setDept(selectedItemD);
             patient.setLname(txtLastName.getText());
             patient.setFname(txtFullName.getText());
             patient.setAddr(txtAddr.getText());
@@ -368,6 +389,9 @@ public class AddPatientFrame extends javax.swing.JFrame {
             if (femaleRadioButton.isSelected()) {
                 sex = "female";
             }
+            if (otherRadioButton.isSelected()) {
+                sex = "other";
+            }
             patient.setSex(sex);
             patientService.addPatient(patient);
 
@@ -379,14 +403,20 @@ public class AddPatientFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_sbBtnActionPerformed
 
-    private void txtDepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDepActionPerformed
+    private void femaleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_femaleRadioButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDepActionPerformed
+    }//GEN-LAST:event_femaleRadioButtonActionPerformed
+
+    private void maleRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maleRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_maleRadioButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> depComboBox;
+    private javax.swing.JComboBox<String> depComboBox1;
     private com.toedter.calendar.JDateChooser dobDate;
     private javax.swing.JRadioButton femaleRadioButton;
     private javax.swing.JLabel jLabel1;
@@ -401,9 +431,9 @@ public class AddPatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton maleRadioButton;
+    private javax.swing.JRadioButton otherRadioButton;
     private javax.swing.JButton sbBtn;
     private javax.swing.JTextField txtAddr;
-    private javax.swing.JTextField txtDep;
     private javax.swing.JTextField txtDoj;
     private javax.swing.JTextField txtFullName;
     private javax.swing.JTextField txtId;

@@ -56,12 +56,12 @@
                           <Component id="txtAddr" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="txtFullName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="txtLastName" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
-                          <Component id="txtDep" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="txtDoj" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="txtId" alignment="0" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="txtSkill" min="-2" pref="650" max="-2" attributes="0"/>
                           <Component id="dobDate" alignment="0" min="-2" pref="174" max="-2" attributes="0"/>
                           <Component id="accIdCb" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
+                          <Component id="depComboBox" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -73,6 +73,8 @@
                               <Component id="maleRadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               <Component id="femaleRadioButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                              <Component id="otherRadioButton" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -105,8 +107,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtDep" pref="43" max="32767" attributes="0"/>
-                  <Component id="jLabel4" max="32767" attributes="0"/>
+                  <Component id="jLabel4" pref="43" max="32767" attributes="0"/>
+                  <Component id="depComboBox" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -152,7 +154,10 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="femaleRadioButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="femaleRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="otherRadioButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -270,11 +275,6 @@
         <Property name="text" type="java.lang.String" value="Technical Skill"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtDep">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDepActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtLastName">
     </Component>
     <Component class="javax.swing.JTextField" name="txtFullName">
@@ -343,6 +343,37 @@
       </AuxValues>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dobDate">
+      <Properties>
+        <Property name="minSelectableDate" type="java.util.Date" editor="org.netbeans.beaninfo.editors.DateEditor">
+          <SerializedValue value="-84,-19,0,5,115,114,0,14,106,97,118,97,46,117,116,105,108,46,68,97,116,101,104,106,-127,1,75,89,116,25,3,0,0,120,112,119,8,-1,-1,-57,124,-30,62,122,-8,120"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="AddStaffFrame_dobDate"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="otherRadioButton">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Other"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="depComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="1st Floor"/>
+            <StringItem index="1" value="2nd Floor"/>
+            <StringItem index="2" value="3rd Floor"/>
+            <StringItem index="3" value="4th Floor"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

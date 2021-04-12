@@ -352,8 +352,9 @@ public class AddUserFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Add Success");
             
             new ListUserJPanel().setVisible(true);
-            new ListUserJPanel().refresh();
+            
             this.dispose();
+            new ListUserJPanel().refresh();
         }else {
             JOptionPane.showMessageDialog(null, "Add Fail!");
         }

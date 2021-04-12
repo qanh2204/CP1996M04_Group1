@@ -7,6 +7,7 @@ package view;
 
 import dao.HistoryDAO;
 import dao.UserDao;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import javax.swing.JOptionPane;
 import model.History;
@@ -62,6 +63,12 @@ public class Login_Form extends javax.swing.JFrame {
         jLabel3.setText("Password");
 
         txtUsername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
 
         btnSigIn.setBackground(new java.awt.Color(204, 255, 204));
         btnSigIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -208,6 +215,54 @@ public class Login_Form extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            UserDao userDao = new UserDao();
+        String user = txtUsername.getText();
+        String pass = new String(txtPassword.getPassword());
+        String type = userDao.getType(user, pass);
+        if (type != null) {
+            String ID = userDao.getID(user, pass);
+            int STT = HistoryDAO.findMaxSTT() + 1;
+            long millis = System.currentTimeMillis();
+            Date current_day = new Date(millis);
+            History his = new History(STT, ID, current_day);
+            HistoryDAO.insert(his);
+        }
+
+        if (user.length() == 0 || pass.length() == 0) {
+            JOptionPane.showMessageDialog(this, "Username or password are not empty", "Notification", JOptionPane.WARNING_MESSAGE);
+        } else if (type.compareTo("") == 0) {
+            JOptionPane.showMessageDialog(this, "Username or password is incorrect", "Notification", JOptionPane.WARNING_MESSAGE);
+        } else if (type.equals("adm")) {
+            this.dispose();
+            //ListUserFrame userFrame = new ListUserFrame();
+            MainUserFrame userFrame = new MainUserFrame();
+            userFrame.setTitle("Admin Form");
+            userFrame.setResizable(false);
+            userFrame.setLocationRelativeTo(null);
+            userFrame.setVisible(true);
+
+        } else if (type.equals("sta")) {
+            this.dispose();
+            MainStaffFrame staffFrame = new MainStaffFrame();
+            staffFrame.setTitle("Staff Form");
+            staffFrame.setResizable(false);
+            staffFrame.setLocationRelativeTo(null);
+            staffFrame.setVisible(true);
+
+        } else if (type.equals("doc")) {
+            this.dispose();
+            Form_docter docterFrame = new Form_docter();
+            docterFrame.setTitle("Docter Form");
+            docterFrame.setResizable(false);
+            docterFrame.setLocationRelativeTo(null);
+            docterFrame.setVisible(true);
+        }
+        }
+        
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
