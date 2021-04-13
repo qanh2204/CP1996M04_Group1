@@ -5,21 +5,26 @@
  */
 package model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Windows
  */
 public class Report {
-    private int patient_id,test_id;
+
+    private int patient_id, test_id;
     private String report;
+    private Date dayAdd;
 
     public Report() {
     }
 
-    public Report(int patient_id, int test_id, String report) {
+    public Report(int patient_id, int test_id, String report, Date dayAdd) {
         this.patient_id = patient_id;
         this.test_id = test_id;
         this.report = report;
+        this.dayAdd = dayAdd;
     }
 
     public int getPatient_id() {
@@ -45,6 +50,13 @@ public class Report {
     public void setReport(String report) {
         this.report = report;
     }
-    
-    
+
+    public Date getDayAdd() {
+        return dayAdd;
+    }
+
+    public void setDayAdd(Date dayAdd) {
+        this.dayAdd = dayAdd;
+    }
+
 }

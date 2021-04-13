@@ -38,27 +38,6 @@ create table Patient(
 	Dob date not null
 );
 
-
-create table Billing(
-   bill_no int primary key,
-   patient_id int not null,
-   amount int,
-   DayBuy date not null,
-   CONSTRAINT fk_patientid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
-);
-
-create table BillDetail(
-	bill_no int,
-	test_id int not null,
-	doctor_id int not null,
-	cost int not null,
-	DayAdd date not null,
-	primary key(bill_no,test_id,DayAdd),
-	FOREIGN KEY (bill_no) REFERENCES Billing(bill_no),
-	FOREIGN KEY (test_id) REFERENCES Test(test_id),
-	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
-);
-
 create table Test(
    test_id int primary key,
    t_name varchar(35) not null,
@@ -87,6 +66,7 @@ create table Report(
    patient_id int not null,
    report varchar(100),
    test_id int not null,
+   DayAdd date not null,
    CONSTRAINT fk_ptid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
    CONSTRAINT fk_testid FOREIGN KEY (test_id) REFERENCES Test(test_id)
 ); 
@@ -97,6 +77,29 @@ create table History(
 	current_day date not null,
 	FOREIGN KEY (id) REFERENCES Account(id)
 );
+
+
+create table Billing(
+   bill_no int primary key,
+   patient_id int not null,
+   amount int,
+   DayBuy date not null,
+   CONSTRAINT fk_patientid FOREIGN KEY (patient_id) REFERENCES Patient(patient_id),
+);
+
+create table BillDetail(
+	bill_no int,
+	test_id int not null,
+	doctor_id int not null,
+	cost int not null,
+	DayAdd date not null,
+	primary key(bill_no,test_id,DayAdd),
+	FOREIGN KEY (bill_no) REFERENCES Billing(bill_no),
+	FOREIGN KEY (test_id) REFERENCES Test(test_id),
+	FOREIGN KEY (doctor_id) REFERENCES Doctor(doctor_id)
+);
+
+
 
 insert into Account values ('ADM001','anh','123','adm');
 insert into Account values ('STA001','van','123','sta');
@@ -118,5 +121,10 @@ select sum(cost) as Total from BillDetail group by bill_no having bill_no=1
 select * from BillDetail
 select * from History
 
-insert into History values (1,'STA001','2021-4-6');
-insert into History values (2,'STA001','2021-4-6');
+select * from Report
+
+select test_id from BillDetail where bill_no=1
+
+select patient_id from Billing where bill_no=1
+
+

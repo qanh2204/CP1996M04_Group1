@@ -10,22 +10,26 @@ import dao.BillDetailDAO;
 import dao.HistoryDAO;
 import dao.JDBCConection;
 import dao.PatientDAO;
+import dao.ReportDAO;
 import dao.StaffDao;
 import dao.TestDAO;
 import dao.UserDao;
 import model.Bill;
 import java.awt.Font;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 import model.Bill_Detail;
 import service.DoctorService;
 import javax.swing.table.DefaultTableModel;
+import model.Report;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -97,23 +101,27 @@ public class Bill_Form extends javax.swing.JPanel {
     }
 
     private void showBill() {
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         rp = BillDAO.findAll();
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         tableModel.setRowCount(0);
 
         rp.forEach((r) -> {
-            tableModel.addRow(new Object[]{r.getBill_no(), r.getPatient_id(), r.getAmount(), format.format(r.getDayBuy())});
+            tableModel.addRow(new Object[]{r.getBill_no(), PatientDAO.findName(r.getPatient_id()), currencyVN.format(r.getAmount()), format.format(r.getDayBuy())});
         });
     }
 
     private void showBillDetail(int bill_no) {
         bd = BillDetailDAO.findAll(bill_no);
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 
         tableModel1.setRowCount(0);
         bd.forEach((Bill_Detail b) -> {
             String t_name = TestDAO.findName(b.getTest_id());
 
-            tableModel1.addRow(new Object[]{b.getTest_id(), t_name, b.getCost()});
+            tableModel1.addRow(new Object[]{b.getTest_id(), t_name, currencyVN.format(b.getCost())});
         });
     }
 
@@ -121,6 +129,10 @@ public class Bill_Form extends javax.swing.JPanel {
         int total = BillDetailDAO.getTong(bill_no);
         BillDAO.updateAmount(bill_no, total);
         showBillDetail(bill_no);
+    }
+
+    private void add_report() {
+
     }
 
     public void PrintBill(int bill_no, String date) {
@@ -181,7 +193,7 @@ public class Bill_Form extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Bill No", "Patient ID", "Amount", "Day "
+                "Bill No", "Patient", "Amount", "Day "
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -363,6 +375,8 @@ public class Bill_Form extends javax.swing.JPanel {
         if (selectedIndex != -1) {
             //Neu chon bang thi cap nhat
             Bill bill = rp.get(selectedIndex);
+            //Get patient id
+            int pt = bill.getPatient_id();
             //Get test id
             int ts = TestDAO.findID((String) cmbTest.getSelectedItem());
             //Get cost
@@ -376,6 +390,8 @@ public class Bill_Form extends javax.swing.JPanel {
             Bill_Detail billdetail = new Bill_Detail(bill.getBill_no(), ts, doc, am, day);
             BillDetailDAO.insert(billdetail);
             updateCost(bill.getBill_no());
+            Report r = new Report(pt, ts, "", day);
+            ReportDAO.insert(r);
 
         } else {
             //Create bill_no
@@ -398,6 +414,8 @@ public class Bill_Form extends javax.swing.JPanel {
 
             BillDAO.insert(bill);
             BillDetailDAO.insert(billdetail);
+            Report r = new Report(pt, ts, "", day);
+            ReportDAO.insert(r);
         }
         showBill();
         clear();
@@ -408,19 +426,6 @@ public class Bill_Form extends javax.swing.JPanel {
         Bill bill = rp.get(selectedIndex);
 
         showBillDetail(bill.getBill_no());
-//        if (selectedIndex >= 0) {
-//            Bill t = rp.get(selectedIndex);
-////            for (int i = 0; i < cmbTest.getItemCount(); i++) {
-////                if (cmbTest.getItemAt(i).equalsIgnoreCase(TestDAO.findName(t.getTest_id()))) {
-////                    cmbTest.setSelectedIndex(i);
-////                }
-////            }
-//            for (int i = 0; i < cmbPatient.getItemCount(); i++) {
-//                if (cmbPatient.getItemAt(i).equalsIgnoreCase(t.getPatient_id() + "-" + PatientDAO.findName(t.getPatient_id()))) {
-//                    cmbPatient.setSelectedIndex(i);
-//                }
-//            }
-//        }
 
     }//GEN-LAST:event_tblBillMouseClicked
 
@@ -436,6 +441,11 @@ public class Bill_Form extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
+    public void deleteReport(List<Integer> list, int pt_id, Date day) {
+        for (int i = 0; i < list.size(); i++) {
+            ReportDAO.delete(pt_id, list.get(i), day);
+        }
+    }
     private void btnDeleteAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAllActionPerformed
         int selectedIndex = tblBill.getSelectedRow();
 
@@ -444,14 +454,19 @@ public class Bill_Form extends javax.swing.JPanel {
         } else {
             Bill b = rp.get(selectedIndex);
             int Bno = b.getBill_no();
+            List<Integer> test_list = new ArrayList<>();
+            test_list = BillDetailDAO.getAllTest(Bno);
             int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete");
             if (option == 0) {
                 BillDetailDAO.deleteAll(Bno);
                 BillDAO.delete(Bno);
                 showBillDetail(Bno);
                 showBill();
+                deleteReport(test_list, b.getPatient_id(), b.getDayBuy());
                 clear();
+
             }
+
         }
     }//GEN-LAST:event_btnDeleteAllActionPerformed
 
@@ -472,11 +487,13 @@ public class Bill_Form extends javax.swing.JPanel {
             Bill_Detail b = bd.get(Index2);
             int Bno = b.getBill_no();
             int test_id = b.getTest_id();
+            int patient = BillDAO.getPatient(Bno);
             int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete");
             if (option == 0) {
                 BillDetailDAO.deleteBy(Bno, test_id);
                 updateCost(Bno);
                 showBillDetail(Bno);
+                ReportDAO.delete(patient, test_id, b.getDay());
                 showBill();
                 clear();
             }

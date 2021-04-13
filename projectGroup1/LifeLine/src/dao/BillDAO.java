@@ -345,4 +345,46 @@ public class BillDAO {
         }
         //ket thuc.
     }
+    
+    public static int getPatient(int bill_no) {
+        int id = 0;
+        
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            connection = JDBCConection.getConnection();
+            
+            String sql = "select patient_id from Billing where bill_no = ?";
+            statement = connection.prepareCall(sql);
+            statement.setInt(1, bill_no);
+            
+            ResultSet resultSet = statement.executeQuery();
+            
+            while (resultSet.next()) {
+                id = resultSet.getInt("patient_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+
+        return id;
+    }
 }

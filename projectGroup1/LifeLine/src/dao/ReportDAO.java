@@ -8,6 +8,7 @@ package dao;
 import model.Report;
 import model.Test;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +39,8 @@ public class ReportDAO {
 
             while (resultSet.next()) {
                 Report ct;
-                ct = new Report(resultSet.getInt("patient_id"), resultSet.getInt("test_id"), resultSet.getString("report"));
+                ct = new Report(resultSet.getInt("patient_id"), resultSet.getInt("test_id")
+                        , resultSet.getString("report"), resultSet.getDate("DayAdd"));
                 test.add(ct);
             }
         } catch (SQLException ex) {
@@ -117,14 +119,13 @@ public class ReportDAO {
             connection = dao.JDBCConection.getConnection();
 
             //query
-            String sql = "update report set patient_id=?, report=?, test_id=?  where patient_id=? and test_id=?";
+            String sql = "update report set report=? where patient_id=? and test_id=? and DayAdd=?";
             statement = connection.prepareCall(sql);
 
-            statement.setInt(1, ct.getPatient_id());
-            statement.setString(2, ct.getReport());
+            statement.setString(1, ct.getReport());
+            statement.setInt(2, ct.getPatient_id());
             statement.setInt(3, ct.getTest_id());
-            statement.setInt(4, ct.getPatient_id());
-            statement.setInt(5, ct.getTest_id());
+            statement.setDate(4, ct.getDayAdd());
 
             statement.execute();
         } catch (SQLException ex) {
@@ -158,12 +159,13 @@ public class ReportDAO {
             connection = dao.JDBCConection.getConnection();
 
             //query
-            String sql = "insert into report values(?, ?, ?)";
+            String sql = "insert into report values(?, ?, ?, ?)";
             statement = connection.prepareCall(sql);
 
             statement.setInt(1, s.getPatient_id());
             statement.setNString(2, s.getReport());
             statement.setInt(3, s.getTest_id());
+            statement.setDate(4, s.getDayAdd());
 
             statement.execute();
         } catch (SQLException ex) {
@@ -188,9 +190,7 @@ public class ReportDAO {
         //ket thuc.
     }
 
-
-    //xóa hết sản phẩm có trong hóa đơn
-    public static void delete(int id_patient, int id_test) {
+    public static void delete(int id_patient, int id_test, Date day) {
         Connection connection = null;
         PreparedStatement statement = null;
 
@@ -199,11 +199,12 @@ public class ReportDAO {
             connection = dao.JDBCConection.getConnection();
 
             //query
-            String sql = "delete from report where patient_id=? and test_id = ?";
+            String sql = "delete from report where patient_id=? and test_id = ? and DayAdd=?";
             statement = connection.prepareCall(sql);
 
             statement.setInt(1, id_patient);
             statement.setInt(2, id_patient);
+            statement.setDate(3, day);
 
             statement.execute();
         } catch (SQLException ex) {

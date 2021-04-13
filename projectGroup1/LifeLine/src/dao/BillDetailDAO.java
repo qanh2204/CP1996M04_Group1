@@ -261,5 +261,47 @@ public class BillDetailDAO {
         //ket thuc.
         return total;
     }
+    
+    public static List<Integer> getAllTest(int bill_no) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        List<Integer> l = new ArrayList<>();
+
+        try {
+            connection = JDBCConection.getConnection();
+
+            //query
+            String sql = "select test_id from BillDetail where bill_no=?";
+            statement = connection.prepareCall(sql);
+
+            statement.setInt(1, bill_no);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                l.add(resultSet.getInt("test_id"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(BillDetailDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        //ket thuc.
+        return l;
+    }
 
 }
